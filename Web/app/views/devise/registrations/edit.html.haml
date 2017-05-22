@@ -1,0 +1,47 @@
+= render "partial/header"
+%main
+  .row
+    .col.s12
+      .col.s12.l6.m10.offset-l3.offset-m1
+        .card-panel.grey.lighten-4.z-depth-1
+          %h2.blue-text.darken-1 Mon compte
+          = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+            = devise_error_messages!
+            .field
+              = f.label :email,"Email"
+              %br/
+              = f.email_field :email, autofocus: true
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              %div
+                Currently waiting confirmation for: #{resource.unconfirmed_email}
+            .field
+              = f.label :immatriculation,"Immatriculation"
+              %br/
+              = f.text_field :immatriculation, autocomplete: "on"
+            .field
+              = f.label :accept_notification,"Alarme par mail"
+              %br/
+              = f.radio_button :accept_notification, "true"
+              = f.label :accept_notification_true, "Oui"
+              = f.radio_button :accept_notification, "false"
+              = f.label :accept_notification_false, "Non"
+              %h5.blue-text.darken-1 Changer le mot de passe
+            .field
+              = f.label :password,"Nouveau mot de passe"
+              %i (Laisser vide si vous ne souhaitez pas le changer)
+              %br/
+              = f.password_field :password, autocomplete: "off"
+            .field
+              = f.label :password_confirmation,"Confirmation du mot de passe"
+              %br/
+              = f.password_field :password_confirmation, autocomplete: "off"
+              %h5.blue-text.darken-1 Confirmer les changements
+            .field
+              = f.label :current_password,"Mot de passe actuelle"
+              %i (Mot de passe actuelle afin de valider les changements)
+              %br/
+              = f.password_field :current_password, autocomplete: "off"
+            .actions
+              = f.submit "Mettre à jour", class: "waves-effect waves-light btn blue darken-2"
+
+= render "partial/footer"

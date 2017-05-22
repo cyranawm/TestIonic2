@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Bonjour </h3>
+    <p>
+      Il ne vous reste que <%= @time %> avant l'expiration de votre place de parking.
+    </p>
+    <br>
+    <p>Rappel:</p>
+    <ul>
+    <li>Date de stationnement: <%= @start_time %> </li>
+    <li>Date d'expiration: <%= @end_time %> </li>
+	  <li>Numero de place: <%= @spot_id %></li>
+	  <li>Type: <%= @spot_type %></li>
+	  <li>Adresse: <%= @spot_address %></li>
+	  <li>Ville: <%= @spot_town %></li>
+	</ul>
+    <br>
+    <p>Vous pouvez annuler l'envoi de ces mails en cliquant <a href="http://statioguide.technolia.fr/users/edit">ici</a>, rubrique alarme par mail</p>
+    <br>
+    <p>L'équipe Technolia</p>
+  </body>
+</html>
+

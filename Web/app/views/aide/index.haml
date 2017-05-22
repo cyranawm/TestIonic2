@@ -1,0 +1,60 @@
+= render "/partial/header"
+
+.container
+ .row
+  .col.s12.m6
+   .card.aidecard
+    .card-image
+     %img{:src => "../assets/demo.png"}/
+     .card-content
+      %p Voici un exemple d'utilisation:
+      %br La zone verte est une zone où toutes les places sont disponibles.
+      %br La zone jaune signifie qu'il reste seulement quelques places disponibles.
+      %br La zone rouge signifie qu'il ne reste aucune place.
+      %br La zone grise definit une zone sur laquelle on ne peut fournir d'informations.
+      %br
+
+
+  .col.s12.m6
+   .card.aidecard
+    .card-image.popup_example
+     %img{:src => "../assets/popup_example.png"}/
+     %span.card-title 
+     .card-content
+      %p L'info-bulle d'une place contient différentes informations:
+      %ul
+      %li L'adresse.
+      %li Le type de la place.
+      %li Son état.
+      %li La plage horaire en cours.
+      %li La durée de stationnement autorisé.
+      %br
+      %p Elle contient aussi deux boutons, un qui permet de réserver la place, ainsi qu'un autre pour tracer un itinéraire de votre position a la place souhaité.   
+      %br
+      %p Notez bien que dans le cas d'une borne occupée, vous ne pourrez pas la reserver, en revanche si vous venez de vous stationner sans réservation, vous avez la possibilité de suivre votre temps restant et d'être alerté par mail (si vous êtes connectés) en cliquant sur le bouton "SE SOUVENIR DE CETTE POSITION" .
+
+
+  .col.s12.m6
+   .card.aidecard
+    .card-image
+     %img{:src => "../assets/demo_user.png"}/
+     %span.card-title 
+     .card-content
+      %p Les comptes utilisateurs permettent d'effectuer des réservations ou de mémoriser la position de votre voiture afin de la retrouver plus facilement.
+      %br
+      Vous pouvez aussi vous abonnez à des alertes par mail afin de recevoir un mail lorsque votre place de parking est sur le point d'expirer.
+      Ainsi en vous inscrivant vous pouvez pleinement profitez de l'application Statio'Guide.
+
+  .col.s12.m6
+   .card.aidecard
+    .card-image.position_example
+     %img{:src => "../assets/geolocation.png"}/
+     %span.card-title 
+     .card-content
+      %p Vous avez la possibilité d'effectuer une recherche par ville ou par adresse. Si vous souhaitez être géolocalisé, vous devez autoriser l'application à accéder à votre position.
+     
+
+
+
+
+= render "/partial/footer"

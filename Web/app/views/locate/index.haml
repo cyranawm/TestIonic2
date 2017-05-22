@@ -1,0 +1,150 @@
+= render "/partial/header"
+
+                     
+.container
+  .row
+    .col.s12
+      .col.s12.l8.m12
+        .card
+          #map
+            #reservation.modal
+              .modal-content
+                %h4 Ma Reservation:
+                .input-field.col.s6
+                  %p 
+                 
+              .modal-footer
+                 
+            #temps-restant.modal
+              .modal-content
+                %h4 Temps restant:
+                %h5#tempsrestant
+              .modal-footer
+                %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Fermer 
+          #message
+            .col.s8.l12.m8.offset-m2.offset-s2.card-panel      
+              %span#close x
+              %h5 Il n'y a aucune places à cet endroit
+          #loader
+            #img 
+              .row
+                .container
+                  .col.s8.l12.m8.offset-m2.offset-s2     
+                    .flow-text.card-panel 
+                      %p Accepter la géolocalisation ou lancer une recherche.
+                      .col.s8.l12.m8.offset-m3.offset-s2     
+                        .progress#load
+                          .determinate{:style => "width: 10%"}
+
+      
+
+
+        
+        .card-panel.col.s12.m5.l6.grey.lighten-5.z-depth-1.outils
+          .row.valign-wrapper
+            .col.s12
+              %h5 Outils
+              #temps Temps restant: Veuillez selectionner une borne  
+              #progressbartime
+                .progress#time
+                  .determinate#avancement{:style => "width: 0%"}
+              #infoparking
+       
+        .card-panel.col.s12.m5.l5.offset-l1.offset-m2.grey.lighten-5.z-depth-1.foundvehicle
+          %h5 Retrouvez votre vehicule
+          %img#control{:src => "../assets/search-car.png",:title => "Retrouver mon vehicule",:alt=> "Retrouver mon vehicule",:onclick => "whereismycar()"}
+          #clearitineraire
+
+      - if user_signed_in?  
+        .col.s12.m12.l4#reservations        
+          .card-panel.grey.lighten-5.z-depth-1
+            .row.valign-wrapper
+              .col.s12
+                %h5 Mes Reservations
+                %ul.collection#allreservations
+                  %li.collection-item.grey.lighten-5 Pas de reservation en cours                  
+       
+      .col.s12.m12.l4#filtre
+        .card-panel.grey.lighten-5.z-depth-1
+          .row.valign-wrapper
+            .col.s12
+              %span.filtre
+                %h5 Selectionnez un filtre
+                %p
+                  %input#minute{:type => "checkbox"}/
+                  %label{:for => "minute"} Statio'Minute
+                  %img#imginput{:src=>"../assets/lg_Typeborne_minute.png"}
+                %p
+                  %input#elec{:type => "checkbox"}/
+                  %label{:for => "elec"} Statio'Elec
+                  %img#imginput{:src=>"../assets/lg_Typeborne_elec.png"}
+                %p
+                  %input#pass{:type => "checkbox"}/
+                  %label{:for => "pass"} Statio'Pass
+                  %img#imginput{:src=>"../assets/lg_Typeborne_pass.png"}
+                / %p
+                /   %input#aine{:type => "checkbox"}
+                /   %label{:for => "aine"} Statio'Ainé
+                / %p
+                /   %input#liv{:type => "checkbox"}
+                /   %label{:for => "liv"} Statio'Liv
+     
+#legend
+  .col.s12.m12.l12
+    .card-panel.grey.lighten-5.z-depth-1#legende
+      .row.valign-wrapper
+        .col.s12
+          .col.s12.m12.l12
+            %img{:src=>"../assets/zone_verte.png"} 
+            Libre
+            %br
+            %img{:src=>"../assets/zone_orange.png"} 
+            Il reste quelques places
+            %br
+            %img{:src=>"../assets/zone_rouge.png"} 
+            Saturée
+            %br
+            %img{:src=>"../assets/zone_grise.png"} 
+            Pas d'informations  
+      
+              
+
+    
+
+= render "/partial/footer"
+%script{:src => "../assets/leaflet/leaflet.js"}
+%script{:src => "../assets/script_principale.js"}
+%script{:src => "../assets/leaflet/plugins/markercluster-src.js"} 
+%script{:src => "../assets/leaflet/plugins/leaflet-legend.js"} 
+%script{:src => "../assets/leaflet/plugins/Control.FullScreen.js"}
+%script{:src => "../assets/leaflet/plugins/leaflet-routing-machine.js"}
+%script{:src => "../assets/leaflet/plugins/leaflet-geocoder-mapzen.js"}
+
+%script{:src => "../assets/cookie/cookiechoices.js"}
+%script{:src => "../assets/cookie/Managecookie.js"}
+
+%script{:src => "../assets/calendrier/calendrier.js"}
+
+
+%script{:src => "../assets/park/parking.js"}
+
+%script{:src => "../assets/spots/spots.js"}
+
+%script{:src => "../assets/getparam.js"}
+
+%script{:src => "../assets/Clusters/Clusters.js"}
+
+%script{:src => " ../assets/underscore-min.js"} 
+%script{:src => "../assets/control.js"}
+%script{:src => "../assets/reservations/reservations.js"}
+
+
+
+
+:javascript
+    var map = L.map('map',{ zoomControl: false ,fullscreenControl: true}).setView([48.5,2],5);
+    
+   
+
+
+   

@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title Statio'Guide | #{@title} 
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    %link{:href => "/assets/leaflet/plugins/MarkerCluster.Default.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/leaflet/plugins/leaflet-legend.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/leaflet/plugins/MarkerCluster.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/leaflet/plugins/leaflet-routing-machine.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/leaflet/leaflet.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/leaflet/plugins/leaflet-geocoder-mapzen.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/leaflet/plugins/Control.FullScreen.css", :rel => "stylesheet"}/
+    
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true 
+    = javascript_include_tag "materialize", 'data-turbolinks-track' => true 
+    
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}/
+  %body
+    = yield

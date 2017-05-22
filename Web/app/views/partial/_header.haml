@@ -1,0 +1,45 @@
+%header
+  %nav.top-nav.blue.darken-2
+    .container
+      .nav-wrapper
+        %img.brand-logo{:alt => "Logo Technolia", :src => "/assets/logo_technolia.png"}/
+        %a.button-collapse{"data-activates" => "mobile-demo", :href => "#"}
+          %img{:alt => "menu", :src => "/assets/menu.png", :onclick => "menu()"}/ 
+      - if user_signed_in?
+        %ul.right.hide-on-med-and-down
+          %li
+            %a{:href => "/locate"} Accueil
+          %li
+            %a{:href => "/aide"} Aide
+          %li
+            %a{:href => "/users/edit"} Mon compte 
+          %li
+            = link_to "Deconnexion", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+        %ul#mobile-demo.side-nav
+          %li
+            %a{:href => "/locate"} Accueil
+          %li
+            %a{:href => "/aide"} Aide 
+          %li
+            %a{:href => "/users/edit"} Mon compte 
+          %li
+            = link_to "Deconnexion", destroy_user_session_path, method: :delete, :class => 'navbar-link'
+      -  else
+        %ul.right.hide-on-med-and-down
+          %li
+            %a{:href => "/locate"} Accueil
+          %li
+            %a{:href => "/aide"} Aide
+          %li
+            %a{:href => "/users/sign_in"} Connexion
+          %li
+            %a{:href => "/users/sign_up"} Inscription
+        %ul#mobile-demo.side-nav
+          %li
+            %a{:href => "/locate"} Accueil
+          %li
+            %a{:href => "/aide"} Aide 
+          %li
+            %a{:href => "/users/sign_in"} Connexion
+          %li
+            %a{:href => "/users/sign_up"} Inscription

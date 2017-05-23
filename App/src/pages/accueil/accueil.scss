@@ -1,3 +1,10 @@
 page-accueil {
+  [noScroll] {
+    overflow: hidden;
+  }
 
+  #map {
+    height: 90%;
+    width: 90%;
+  }
 }

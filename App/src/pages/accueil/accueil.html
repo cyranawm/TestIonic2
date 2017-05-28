@@ -5,8 +5,11 @@
 <ion-header>
 
   <ion-navbar> 
-    <ion-title>
+    <div class = "titleicon">
       <img src="../../assets/images/logo_technolia.png"  height="40px"/>
+    </div>
+
+    <ion-title>
     </ion-title>
   </ion-navbar>
 
@@ -14,19 +17,21 @@
 
 
 <ion-content [attr.noScroll]="shouldScroll">
-  <div id="map"></div>
+  <div id="map" center ></div>
   <ion-fab left top>
-    <button ion-fab color="light" round>Filtrer</button>
-      <ion-fab-list>
-      <button ion-button icon-right color="light" round>
-        Statio'Minute
+    <button  ion-fab color="light" round>Filtres</button>
+    <ion-fab-list>
+      <button class="filters" ion-button icon-right round [color]="Minute_is_pressed ? 'secondary' : 'light'"  (tap)="Minute_Pressed()">
+        Statio'Minute 
         <ion-icon name="ios-timer-outline"></ion-icon>
       </button>
-      <button ion-button icon-right color="light" round>
+
+      <button class="filters" ion-button icon-right round [color]="Elec_is_pressed ? 'secondary' : 'light'"  (tap)="Elec_Pressed()">
         Statio'Elec
         <ion-icon name="ios-flash-outline"></ion-icon>
       </button>
-      <button ion-button icon-right color="light" round>
+      
+      <button class="filters" ion-button icon-right round [color]="Pass_is_pressed ? 'secondary' : 'light'"  (tap)="Pass_Pressed()">
         Statio'Pass
         <ion-icon name="ios-bicycle-outline"></ion-icon>
       </button>

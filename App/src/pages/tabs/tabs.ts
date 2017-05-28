@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { AccueilPage } from '../accueil/accueil';
 import { AidePage } from "../aide/aide";
 import { ConnexionPage } from "../connexion/connexion";
@@ -13,8 +12,7 @@ export class TabsPage {
   tab1Root = AccueilPage;
   tab2Root = AidePage;
   tab3Root = ConnexionPage;
-  tab4Root = InscriptionPage
-
+  tab4Root = InscriptionPage;
   constructor() {
 
   }

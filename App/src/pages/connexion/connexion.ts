@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ForgotPasswordPage } from "../forgot-password/forgot-password";
 
 /**
  * Generated class for the ConnexionPage page.
@@ -14,11 +15,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ConnexionPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public  modalCtrl: ModalController ) {
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConnexionPage');
   }
-
+  view_forgot(){
+    let newModal = this.modalCtrl.create(ForgotPasswordPage);
+    newModal.present();
+  }
 }

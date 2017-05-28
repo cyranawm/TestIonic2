@@ -7,8 +7,11 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>
+    <div class = "titleicon">
       <img src="../../assets/images/logo_technolia.png"  height="40px"/>
+    </div>
+
+    <ion-title>
     </ion-title>
   </ion-navbar>
 
@@ -27,5 +30,5 @@
 
 </ion-list>
 <button ion-button block>Connexion</button>
-<button ion-button block>Mot de passe oublié ?</button>
+<button ion-button block (tap) = "view_forgot()">Mot de passe oublié ?</button>
 </ion-content>

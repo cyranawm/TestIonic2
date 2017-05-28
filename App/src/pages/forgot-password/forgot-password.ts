@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -14,11 +14,30 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ForgotPasswordPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public  viewCtrl: ViewController, public alertCtrl: AlertController){
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ForgotPasswordPage');
+  }
+  Return() {
+    this.viewCtrl.dismiss();
+  }
+
+  showAlert_sucess() {
+  let alert = this.alertCtrl.create({
+      title: 'Envoi réussi',
+      subTitle: 'Vous allez recevoir par e-mail les instructions nécessaires à la réinitialisation de votre mot de passe',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  Send_instructions(){
+    this.viewCtrl.dismiss();
+    /* Ajouter instruction d'envoi réinitialisation mot de passe */
+    this.showAlert_sucess();
   }
 
 }

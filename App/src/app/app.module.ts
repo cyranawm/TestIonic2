@@ -11,6 +11,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ForgotPasswordPage } from "../pages/forgot-password/forgot-password";
 
 
 
@@ -21,7 +22,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AidePage,
     ConnexionPage,
     InscriptionPage,
-    TabsPage
+    TabsPage,
+    ForgotPasswordPage
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ConnexionPage,
     InscriptionPage,
     TabsPage,
+    ForgotPasswordPage,
   ],
   providers: [
     StatusBar,

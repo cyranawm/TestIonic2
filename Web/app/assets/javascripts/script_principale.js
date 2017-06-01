@@ -45,7 +45,7 @@
       map.addControl( Legend );
       $(".legend-container").append( $("#legend") );
       $(".legend-toggle").append( "<i class='legend-toggle-icon fa fa-info fa-2x' style='color: #000'></i>" );    
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:20,maxNativeZoom:19}).addTo(map);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:20,maxNativeZoom:19,zoomControl: false }).addTo(map);
       new L.Control.Zoom({ position: 'bottomright' }).addTo(map);
       var popup = L.popup();
     });

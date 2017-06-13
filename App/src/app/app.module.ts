@@ -12,6 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ForgotPasswordPage } from "../pages/forgot-password/forgot-password";
+import { MonComptePage } from "../pages/mon-compte/mon-compte";
 
 
 
@@ -23,6 +24,7 @@ import { ForgotPasswordPage } from "../pages/forgot-password/forgot-password";
     ConnexionPage,
     InscriptionPage,
     TabsPage,
+    MonComptePage,
     ForgotPasswordPage
   ],
   imports: [
@@ -37,6 +39,7 @@ import { ForgotPasswordPage } from "../pages/forgot-password/forgot-password";
     ConnexionPage,
     InscriptionPage,
     TabsPage,
+    MonComptePage,
     ForgotPasswordPage,
   ],
   providers: [

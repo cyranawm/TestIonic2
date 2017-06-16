@@ -29,7 +29,7 @@ export class ForgotPasswordPage {
   let alert = this.alertCtrl.create({
       title: 'Envoi réussi',
       subTitle: 'Vous allez recevoir par e-mail les instructions nécessaires à la réinitialisation de votre mot de passe',
-      buttons: ['OK']
+      buttons: ['Ok']
     });
     alert.present();
   }

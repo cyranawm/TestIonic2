@@ -8,11 +8,11 @@ import { AidePage } from "../pages/aide/aide";
 import { ConnexionPage } from "../pages/connexion/connexion";
 import { InscriptionPage } from "../pages/inscription/inscription";
 import { TabsPage } from '../pages/tabs/tabs';
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ForgotPasswordPage } from "../pages/forgot-password/forgot-password";
 import { MonComptePage } from "../pages/mon-compte/mon-compte";
+import { AuthService } from './../providers/auth-service/auth-service';
 
 
 
@@ -45,7 +45,7 @@ import { MonComptePage } from "../pages/mon-compte/mon-compte";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    AuthService,  ]
 })
 export class AppModule {}

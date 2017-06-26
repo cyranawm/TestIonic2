@@ -16,6 +16,7 @@ export class AccueilPage implements OnInit {
   Elec_is_pressed:boolean = false;
   Pass_is_pressed:boolean = false;
   Locate_is_pressed:boolean = false;
+  
 
 
   constructor(public navCtrl: NavController) {
@@ -29,13 +30,102 @@ export class AccueilPage implements OnInit {
     var map = L.map('map',{zoomControl:false })
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
-    L.easyButton('fa-bandcamp', function(btn,map) {
-      if (Location_marker) {
-        map.removeLayer(Location_marker);
-        map.removeLayer(Location_circle);
-      }
-      map.locate({setView:true, maxZoom: 16})
-    }).addTo( map );
+    var randomMarkers = L.layerGroup([
+      L.marker([37.8, -110]), L.marker([38.8, -86]), L.marker([47.8, -106]),
+      L.marker([31.8, -120]), L.marker([39.8, -96]), L.marker([33.8, -100]) ]);
+
+    
+
+    var flashButton = new L.Control.EasyButton({
+      id: 'button1',  // an id for the generated button
+      type: 'replace',          // set to animate when you're comfy with css
+      leafletClasses: true,     // use leaflet classes to style the button?
+      states: [{
+            stateName: 'noflash',        // name the state
+            icon:      'fa-bolt',               // and define its properties
+            title:     'not-flash',      // like its title
+            onClick: function(btn, map) {       // and its callback
+                map.setView([46.25,-121.8],10);
+                map.addLayer(randomMarkers);
+                btn.state('flash');    // change state on click!
+            }
+        }, {
+            stateName: 'flash',
+            icon:      'fa-bolt',
+            title:     'flash',
+            onClick: function(btn, map) {
+                map.setView([42.3748204,-71.1161913],16);
+                map.removeLayer(randomMarkers);
+                btn.state('noflash');
+            }
+    }]
+    });
+
+    var chronoButton = new L.Control.EasyButton({
+      id: 'button2',  // an id for the generated button
+      type: 'replace',          // set to animate when you're comfy with css
+      leafletClasses: true,     // use leaflet classes to style the button?
+      states: [{
+            stateName: 'nochrono',        // name the state
+            icon:      'fa-clock-o',               // and define its properties
+            title:     'not-chrono',      // like its title
+            onClick: function(btn, map) {       // and its callback
+                map.setView([46.25,-121.8],10);
+                map.addLayer(randomMarkers);
+                btn.state('chrono');    // change state on click!
+            }
+        }, {
+            stateName: 'chrono',
+            icon:      'fa-clock-o',
+            title:     'chrono',
+            onClick: function(btn, map) {
+                map.setView([42.3748204,-71.1161913],16);
+                map.removeLayer(randomMarkers);
+                btn.state('nochrono');
+            }
+    }]
+    });
+
+
+    var handiButton = new L.Control.EasyButton({
+      id: 'button3',  // an id for the generated button
+      type: 'replace',          // set to animate when you're comfy with css
+      leafletClasses: true,     // use leaflet classes to style the button?
+      states: [{
+            stateName: 'nohandi',        // name the state
+            icon:      'fa-wheelchair',               // and define its properties
+            title:     'not-handi',      // like its title
+            onClick: function(btn, map) {       // and its callback
+                map.setView([46.25,-121.8],10);
+                map.addLayer(randomMarkers);
+                btn.state('handi');    // change state on click!
+            }
+        }, {
+            stateName: 'handi',
+            icon:      'fa-wheelchair',
+            title:     'handi',
+            onClick: function(btn, map) {
+                map.setView([42.3748204,-71.1161913],16);
+                map.removeLayer(randomMarkers);
+                btn.state('nohandi');
+            }
+    }]
+    });
+
+    var buttonBar = L.easyBar([
+      flashButton,
+      chronoButton,
+      handiButton,
+      ])
+
+    buttonBar.addTo( map );
+
+
+
+
+
+
+
 
     function onLocationFound(e): void {
       var radius = e.accuracy / 2;
@@ -50,7 +140,7 @@ export class AccueilPage implements OnInit {
     }
 
 
-    var marker;
+    /*var marker;
     
 
     function test(e):void  {
@@ -61,11 +151,11 @@ export class AccueilPage implements OnInit {
       map.addLayer(marker);  
     };
   
-    map.on('click',test); 
+    map.on('click',test); */
 
 
     map.on('locationfound',onLocationFound);
-    map.locate({setView:true, maxZoom: 16})  
+    map.locate({setView:true, maxZoom: 16}) 
   
 }
   
@@ -82,6 +172,9 @@ export class AccueilPage implements OnInit {
     this.Pass_is_pressed=!(this.Pass_is_pressed);
     /*Aller chercher dans BDD les emplacements*/
   }  
-}
+
+ }
+
+  
 
 

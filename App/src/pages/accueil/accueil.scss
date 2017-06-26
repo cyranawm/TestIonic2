@@ -1,3 +1,7 @@
+
+
+
+
 page-accueil {
   [noScroll] {
     overflow: hidden;
@@ -17,3 +21,44 @@ page-accueil {
   width:150px;
   height:40px;
 }
+
+
+#button1{
+  width: 30px;
+  height: 30px;
+  }
+  
+  #button1.flash-active{
+    background-color: #01bc2d
+    }
+
+  #button1.noflash-active{
+    background-color: #bfbfbf
+    }
+
+#button2{
+  width: 30px;
+  height: 30px;
+  }
+  
+  #button2.chrono-active{
+    background-color: #01bc2d
+    }
+
+  #button2.nochrono-active{
+    background-color: #cfcfcf
+    }
+
+#button3{
+  width: 30px;
+  height: 30px;
+  }
+  
+  #button3.handi-active{
+    background-color: #01bc2d
+    }
+
+  #button3.nohandi-active{
+    background-color: #bfbfbf
+    }
+

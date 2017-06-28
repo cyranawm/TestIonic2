@@ -57,3 +57,27 @@ page-accueil {
   #button3.nohandi-active{
     background-color: #bfbfbf
     }
+
+/* --------- Style des clusters --------- */
+
+.marker-cluster {
+	background-clip: padding-box;
+	color: white;
+	font-weight: bolder;
+	border-radius: 20px;
+	}
+
+.marker-cluster-green {
+	text-align: center;
+	background-color: rgba(49, 236, 0, 0.8);
+}
+
+.marker-cluster-orange {
+	 text-align: center;
+	background-color: rgba(241, 211, 87, 0.9);
+}
+
+.marker-cluster-red {
+	background-color: rgba(255, 2, 2, 0.8);
+	 text-align: center;
+}

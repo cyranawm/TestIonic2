@@ -1,9 +1,11 @@
 import { Component , OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+
 import 'leaflet';
 import 'leaflet-easybutton';
 import 'leaflet.markercluster'
+import * as C from '../../assets/typescripts/cluster'
 
 @IonicPage()
 @Component({
@@ -41,7 +43,6 @@ export class AccueilPage implements OnInit {
 
 
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
-
     var locate_button = new L.Control.EasyButton({
       id: 'id-for-the-button',  
       position: 'bottomright',     
@@ -63,23 +64,15 @@ export class AccueilPage implements OnInit {
     /* --------------------- Implémentation bouttons Statioguide --------------------- */
     /* L'idée est d'initialiser les clusters ici .... */
     /* Aller voir la fonction /Users/Lucas/Documents/Mines/Divers/JE/TestIonic2/Web/app/assets/javascripts/Clusters/Clusters.js */
-    var c_marker_flash = L.markerClusterGroup({
-      polygonOptions: {
-          fillColor: '#3887be',
-          color: '#3887be',
-          weight: 2,
-          opacity: 1,
-          fillOpacity: 0.5
-        },disableClusteringAtZoom: 18,
-     iconCreateFunction: function (cluster) {
-      var childMarkers = cluster.getAllChildMarkers();
-      return L.divIcon({ html: "<p> Test </p>",className: "marker-cluster marker-cluster-green",  iconSize: L.point(40, 40)});
-     },
-    });
-
-    var randomMarkers = L.layerGroup([
-    L.marker([37.8, -110]), L.marker([38.8, -86]), L.marker([47.8, -106]),
-    L.marker([31.8, -120]), L.marker([39.8, -96]), L.marker([33.8, -100]) ]);
+    
+    var test_markers = L.layerGroup([
+    L.marker([48.53228665699862,7.72891402244568]),
+    L.marker([48.532130355277786,7.7288925647735605]),
+    L.marker([48.53212325064263,7.728538513183595]),
+    L.marker([48.532265343156006,7.728549242019654]),
+    ]);
+    
+    var cluster_flash = C.create_cluster();
 
     var flashButton = new L.Control.EasyButton({
       id: 'button1',  
@@ -91,8 +84,8 @@ export class AccueilPage implements OnInit {
             title:     'not-flash',       
             onClick: function(btn, map) { 
               /* Et de les remplir ici, ca permet de prendre que les places à moins de 20km */
-              c_marker_flash.addLayer(randomMarkers);
-              map.addLayer(c_marker_flash);
+              cluster_flash.addLayer(test_markers);
+              map.addLayer(cluster_flash);
               btn.state('flash');    
               }
             },{
@@ -100,8 +93,8 @@ export class AccueilPage implements OnInit {
             icon:      'fa-bolt',
             title:     'flash',
             onClick: function(btn, map) {
-              map.removeLayer(c_marker_flash);
-              c_marker_flash.removeLayers;
+              map.removeLayer(cluster_flash);
+              cluster_flash.removeLayers;
               btn.state('noflash');
               }
             }]
@@ -117,7 +110,7 @@ export class AccueilPage implements OnInit {
             title:     'not-chrono',      // like its title
             onClick: function(btn, map) {       // and its callback
               map.setView([46.25,-121.8],10);
-              map.addLayer(randomMarkers);
+              map.addLayer(test_markers);
               btn.state('chrono');    // change state on click!
               }
             },{
@@ -126,7 +119,7 @@ export class AccueilPage implements OnInit {
             title:     'chrono',
             onClick: function(btn, map) {
                 map.setView([42.3748204,-71.1161913],16);
-                map.removeLayer(randomMarkers);
+                map.removeLayer(test_markers);
                 btn.state('nochrono');
             }
           }]
@@ -142,7 +135,7 @@ export class AccueilPage implements OnInit {
             title:     'not-handi',      // like its title
             onClick: function(btn, map) {       // and its callback
               map.setView([46.25,-121.8],10);
-              map.addLayer(randomMarkers);
+              map.addLayer(test_markers);
               btn.state('handi');    // change state on click!
             }
             },{
@@ -151,7 +144,7 @@ export class AccueilPage implements OnInit {
             title:     'handi',
             onClick: function(btn, map) {
               map.setView([42.3748204,-71.1161913],16);
-              map.removeLayer(randomMarkers);
+              map.removeLayer(test_markers);
               btn.state('nohandi');
             }
           }]
@@ -165,15 +158,13 @@ export class AccueilPage implements OnInit {
 
     buttonBar.addTo( map );
 
-    /*var marker;
-    function test(e):void  {
-      if (marker) { // check
-          map.removeLayer(marker); // remove
-      }
-      marker = new L.Marker(e.latlng ); // set
-      map.addLayer(marker);  
+    /* --- Get location on click --- */ 
+    function onclick(e){
+    console.log(e.latlng)
     }
-    map.on('click',test); */  
+
+    map.on('click', onclick); 
+
   }
 }
 

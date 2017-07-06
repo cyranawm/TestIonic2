@@ -6,6 +6,7 @@ def createbooking
 if user_signed_in?
 	login = current_user.email
 	#RestClient.put 'https://api.technolia.fr/spots/'+params[:id_spot]+'/bookings', :login => login,  :spot_id => params[:idspot] 
+	
 	if Reservations.where(:login => login).where(:etat => "En cours").blank?
 	idspot = Reservations.new(:login => login, :spot_id => params[:id_spot],:deviceid =>params[:deviceid],:etat => "En cours",:lat => params[:lat],:lon => params[:lon],:time => Time.now)
 	idspot.save

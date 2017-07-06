@@ -13,6 +13,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ForgotPasswordPage } from "../pages/forgot-password/forgot-password";
 import { MonComptePage } from "../pages/mon-compte/mon-compte";
 import { AuthService } from './../providers/auth-service/auth-service';
+import { RestApiServiceProvider } from '../providers/rest-api-service/rest-api-service';
+import { HttpModule } from '@angular/http';
+
 
 
 
@@ -29,6 +32,7 @@ import { AuthService } from './../providers/auth-service/auth-service';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -45,7 +49,8 @@ import { AuthService } from './../providers/auth-service/auth-service';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService,  ]
+    {provide: ErrorHandler, useClass: IonicErrorHandler},RestApiServiceProvider,
+    AuthService,
+      ]
 })
 export class AppModule {}

@@ -1,5 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { RestApiServiceProvider } from "../../providers/rest-api-service/rest-api-service";
 
 
 import 'leaflet';
@@ -11,15 +12,19 @@ import * as C from '../../assets/typescripts/cluster'
 @Component({
   selector: 'page-accueil',
   templateUrl: 'accueil.html',
-  
-  
+  providers: [RestApiServiceProvider],
 })
+
 export class AccueilPage implements OnInit {
+  marker_data:any;
+  urlApi:string = "http://localhost:3000"
 
-  constructor(public navCtrl: NavController) {
 
+  constructor(public navCtrl: NavController, public restapiService : RestApiServiceProvider) {
+    
   }
   
+
   ngOnInit(): void {
     /* ------------------------- Initialisation de la carte ------------------------- */
     var map = L.map('map',{zoomControl:false })
@@ -44,7 +49,7 @@ export class AccueilPage implements OnInit {
 
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
     var locate_button = new L.Control.EasyButton({
-      id: 'id-for-the-button',  
+      id: 'locate_button',  
       position: 'bottomright',     
       type: 'replace',          
       leafletClasses: true,     
@@ -53,7 +58,7 @@ export class AccueilPage implements OnInit {
         onClick: function(btn, map){
           map.locate({setView:true, maxZoom: 16})
           },
-        title: 'show me the middle',
+        title: 'geolocate me',
         icon: 'fa-crosshairs'
       }]
     }); 
@@ -83,7 +88,6 @@ export class AccueilPage implements OnInit {
             icon:      'fa-bolt',        
             title:     'not-flash',       
             onClick: function(btn, map) { 
-              /* Et de les remplir ici, ca permet de prendre que les places à moins de 20km */
               cluster_flash.addLayer(test_markers);
               map.addLayer(cluster_flash);
               btn.state('flash');    

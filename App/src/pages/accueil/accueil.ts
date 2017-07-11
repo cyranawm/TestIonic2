@@ -19,13 +19,16 @@ export class AccueilPage implements OnInit {
   marker_data:any;
   urlApi:string = "http://localhost:3000"
 
-
   constructor(public navCtrl: NavController, public restapiService : RestApiServiceProvider) {
-    
   }
   
+  loadspots(){
+     return this.restapiService.getAllSpots()
+    }
 
   ngOnInit(): void {
+
+
     /* ------------------------- Initialisation de la carte ------------------------- */
     var map = L.map('map',{zoomControl:false })
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
@@ -162,13 +165,13 @@ export class AccueilPage implements OnInit {
 
     buttonBar.addTo( map );
 
-    /* --- Get location on click --- */ 
+    /* --- Get data on click --- */ 
+    
     function onclick(e){
-    console.log(e.latlng)
     }
 
     map.on('click', onclick); 
-
+    this.loadspots().forEach(function(i){console.log(i)});
   }
 }
 

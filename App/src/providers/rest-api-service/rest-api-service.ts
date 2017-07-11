@@ -1,6 +1,12 @@
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response, Headers, URLSearchParams, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs';
+
+
+import {Spot} from './spot';
 
 /*
   Generated class for the RestApiServiceProvider provider.
@@ -14,25 +20,22 @@ export class RestApiServiceProvider {
   spots:any;
 
   constructor(public http: Http) {
-    this.getspotbylatlng();
   }
 
-  getspotbylatlng(){
-    if (this.spots) {
-      Promise.resolve(this.spots);
-    }
+  getAllSpots(): Observable<Spot[]>{
+      var header = new Headers({ 'Accept': 'application/json'});
+      var options = new RequestOptions({ headers: header});
+      return this.http.get("http://localhost:3000/markers",options)
+      .map((res:Response) => res.json())
+      .catch(this.handleError);
+    };
 
-    new Promise(resolve => {
-      this.http.get("http://localhost:3000/spots")
-      .map(res => res.json())
-      .subscribe(
-        data => {
-          this.spots = data;
-          resolve(this.spots);
-        });
-    });
+  private handleError (error: Response | any) {
+    console.error(error.message || error);
+    return Observable.throw(error.message || error);
+  }
 
-    var spot = this.spots["spots"];
+    /*var spot = this.spots["spots"];
     var tableau = new Array();
     
     for (spot in spot){
@@ -43,8 +46,10 @@ export class RestApiServiceProvider {
       var address = spot["location"]["address"];
       var city = spot["location"]["town"];
       
-  }
-    /*
+  };
+
+
+    
             lat = spot["location"]["gps"]["latitude"]
             lng = spot["location"]["gps"]["longitude"]
             id = spot["id"]
@@ -65,5 +70,6 @@ export class RestApiServiceProvider {
     rescue
     end
   */
-  }
+
+
 }

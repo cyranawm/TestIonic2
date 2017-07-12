@@ -1,6 +1,6 @@
 
 export class Spot {
-   id: string;
+   id: number;
    location: string[];
    isfree: string;
    constructor() { 

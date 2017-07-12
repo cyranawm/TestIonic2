@@ -25,7 +25,7 @@ export class RestApiServiceProvider {
   getAllSpots(): Observable<Spot[]>{
       var header = new Headers({ 'Accept': 'application/json'});
       var options = new RequestOptions({ headers: header});
-      return this.http.get("http://localhost:3000/markers",options)
+      return this.http.get("http://localhost:3000/markers"/*,options*/)
       .map((res:Response) => res.json())
       .catch(this.handleError);
     };

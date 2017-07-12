@@ -1,12 +1,13 @@
 import { Component , OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestApiServiceProvider } from "../../providers/rest-api-service/rest-api-service";
-
+import { Spot } from "../../providers/rest-api-service/spot.ts"
 
 import 'leaflet';
 import 'leaflet-easybutton';
-import 'leaflet.markercluster'
-import * as C from '../../assets/typescripts/cluster'
+import 'leaflet.markercluster';
+import * as C from '../../assets/typescripts/cluster';
+ 
 
 @IonicPage()
 @Component({
@@ -27,7 +28,8 @@ export class AccueilPage implements OnInit {
     }
 
   ngOnInit(): void {
-
+    var data = this.marker_data;
+    this.restapiService.getAllSpots().subscribe(Allspots => data = Allspots);
 
     /* ------------------------- Initialisation de la carte ------------------------- */
     var map = L.map('map',{zoomControl:false })
@@ -168,10 +170,15 @@ export class AccueilPage implements OnInit {
     /* --- Get data on click --- */ 
     
     function onclick(e){
+      for(let index in data){
+       console.log(data[index]);
+      }
     }
 
     map.on('click', onclick); 
-    this.loadspots().forEach(function(i){console.log(i)});
+
+    
+    
   }
 }
 

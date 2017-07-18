@@ -24,9 +24,10 @@ module.exports = () => {
     comments:"STP.0001.FR.10/03/05",
     location:{
       id:19,
-      gps:null,
-      longitude:S1[1],
-      latitude:S1[2],
+      gps:{
+        longitude:S1[1],
+        latitude:S1[2]
+      },
       address:"non installé",
       zip_code:"",
       town:"",
@@ -58,9 +59,10 @@ module.exports = () => {
     comments:"STP.0001.FR.10/03/05",
     location:{
       id:19,
-      gps:null,
-      longitude:S2[1],
-      latitude:S2[2],
+      gps:{
+        longitude:S2[1],
+        latitude:S2[2]
+      },
       address:"non installé",
       zip_code:"",
       town:"",
@@ -92,9 +94,10 @@ module.exports = () => {
     comments:"STP.0001.FR.10/03/05",
     location:{
       id:19,
-      gps:null,
-      longitude:S3[1],
-      latitude:S3[2],
+      gps:{
+        longitude:S3[1],
+        latitude:S3[2],
+      },
       address:"non installé",
       zip_code:"",
       town:"",
@@ -126,9 +129,10 @@ module.exports = () => {
     comments:"STP.0001.FR.10/03/05",
     location:{
       id:19,
-      gps:null,
-      longitude:S4[1],
-      latitude:S4[2],
+      gps:{
+        longitude:S4[1],
+        latitude:S4[2]
+      },
       address:"non installé",
       zip_code:"",
       town:"",

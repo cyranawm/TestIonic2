@@ -5,35 +5,27 @@ import { Http, Response, Headers, URLSearchParams, RequestOptions} from '@angula
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
 
-
-import {Spot} from './spot';
-
-/*
-  Generated class for the RestApiServiceProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class RestApiServiceProvider {
   public
-  spots:any;
 
   constructor(public http: Http) {
   }
 
-  getAllSpots(): Observable<Spot[]>{
-      var header = new Headers({ 'Accept': 'application/json'});
-      var options = new RequestOptions({ headers: header});
-      return this.http.get("http://localhost:3000/markers"/*,options*/)
+  getData(url:string){
+    var header = new Headers({ 'Accept': 'application/json'});
+    var options = new RequestOptions({ headers: header});
+    return this.http.get(url/*,options*/)
       .map((res:Response) => res.json())
       .catch(this.handleError);
-    };
+     };
+    
 
   private handleError (error: Response | any) {
     console.error(error.message || error);
     return Observable.throw(error.message || error);
   }
+  
 
     /*var spot = this.spots["spots"];
     var tableau = new Array();

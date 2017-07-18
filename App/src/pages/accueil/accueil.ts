@@ -7,6 +7,7 @@ import 'leaflet';
 import 'leaflet-easybutton';
 import 'leaflet.markercluster';
 import * as C from '../../assets/typescripts/cluster';
+import * as S from '../../assets/typescripts/spot_controllers'
  
 
 @IonicPage()
@@ -17,19 +18,12 @@ import * as C from '../../assets/typescripts/cluster';
 })
 
 export class AccueilPage implements OnInit {
-  marker_data:any;
   urlApi:string = "http://localhost:3000"
 
   constructor(public navCtrl: NavController, public restapiService : RestApiServiceProvider) {
   }
   
-  loadspots(){
-     return this.restapiService.getAllSpots()
-    }
-
   ngOnInit(): void {
-    var data = this.marker_data;
-    this.restapiService.getAllSpots().subscribe(Allspots => data = Allspots);
 
     /* ------------------------- Initialisation de la carte ------------------------- */
     var map = L.map('map',{zoomControl:false })
@@ -70,11 +64,7 @@ export class AccueilPage implements OnInit {
 
     locate_button.addTo(map);
 
-
     /* --------------------- Implémentation bouttons Statioguide --------------------- */
-    /* L'idée est d'initialiser les clusters ici .... */
-    /* Aller voir la fonction /Users/Lucas/Documents/Mines/Divers/JE/TestIonic2/Web/app/assets/javascripts/Clusters/Clusters.js */
-    
     var test_markers = L.layerGroup([
     L.marker([48.53228665699862,7.72891402244568]),
     L.marker([48.532130355277786,7.7288925647735605]),
@@ -168,11 +158,12 @@ export class AccueilPage implements OnInit {
     buttonBar.addTo( map );
 
     /* --- Get data on click --- */ 
-    
+    var data;
+    this.restapiService.getData(this.urlApi+"/spots").subscribe(res => data = res);
+
     function onclick(e){
-      for(let index in data){
-       console.log(data[index]);
-      }
+      var spot_data = S.getAllSpots(data);
+      console.log(spot_data); 
     }
 
     map.on('click', onclick); 

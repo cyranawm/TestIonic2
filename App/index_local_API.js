@@ -10,10 +10,10 @@ module.exports = () => {
 }
 
 /*Emplacements choisis : */
-  var S1 = ["Statio'Pass", 48.53228665699862,7.72891402244568];
-  var S2 = ["Statio'Minute", 48.532130355277786,7.7288925647735605];
-  var S3 = ["Statio'Pass", 48.53212325064263,7.728538513183595];
-  var S4 = ["Statio'Minute", 48.532265343156006,7.728549242019654];
+  var S1 = ["Statio'Pass",7.72891402244568 ,48.53228665699862];
+  var S2 = ["Statio'Minute",7.7288925647735605, 48.532130355277786];
+  var S3 = ["Statio'Pass",7.728538513183595, 48.53212325064263];
+  var S4 = ["Statio'Minute",7.728549242019654, 48.532265343156006];
 
 /*Implémentation de 10 spots dans la BDD */
 module.exports = () => {
@@ -30,7 +30,7 @@ module.exports = () => {
       },
       address:"non installé",
       zip_code:"",
-      town:"",
+      town:"Strasbourg",
       country:"France",
     },
     customs:null,
@@ -65,7 +65,7 @@ module.exports = () => {
       },
       address:"non installé",
       zip_code:"",
-      town:"",
+      town:"Strasbourg",
       country:"France",
     },
     customs:null,
@@ -100,7 +100,7 @@ module.exports = () => {
       },
       address:"non installé",
       zip_code:"",
-      town:"",
+      town:"Strasbourg",
       country:"France",
     },
     customs:null,
@@ -135,7 +135,7 @@ module.exports = () => {
       },
       address:"non installé",
       zip_code:"",
-      town:"",
+      town:"Strasbourg",
       country:"France",
     },
     customs:null,

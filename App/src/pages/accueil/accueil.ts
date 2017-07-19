@@ -24,7 +24,12 @@ export class AccueilPage implements OnInit {
   }
   
   ngOnInit(): void {
+    // Initialisation des variables utilisées sur la carte 
+    var all_spots;
+    this.restapiService.getData(this.urlApi+"/spots").subscribe(res => all_spots = res);
 
+
+    
     /* ------------------------- Initialisation de la carte ------------------------- */
     var map = L.map('map',{zoomControl:false })
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
@@ -83,7 +88,7 @@ export class AccueilPage implements OnInit {
             icon:      'fa-bolt',        
             title:     'not-flash',       
             onClick: function(btn, map) { 
-              cluster_flash.addLayer(test_markers);
+              S.createSpotsMarkers(all_spots,cluster_flash);
               map.addLayer(cluster_flash);
               btn.state('flash');    
               }
@@ -92,6 +97,7 @@ export class AccueilPage implements OnInit {
             icon:      'fa-bolt',
             title:     'flash',
             onClick: function(btn, map) {
+              cluster_flash.clearLayers();
               map.removeLayer(cluster_flash);
               cluster_flash.removeLayers;
               btn.state('noflash');
@@ -158,11 +164,8 @@ export class AccueilPage implements OnInit {
     buttonBar.addTo( map );
 
     /* --- Get data on click --- */ 
-    var data;
-    this.restapiService.getData(this.urlApi+"/spots").subscribe(res => data = res);
-
     function onclick(e){
-      var spot_data = S.getAllSpots(data);
+      var spot_data = S.getAllSpots(all_spots);
       console.log(spot_data); 
     }
 

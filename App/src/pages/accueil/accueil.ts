@@ -8,6 +8,7 @@ import 'leaflet-easybutton';
 import 'leaflet.markercluster';
 import * as C from '../../assets/typescripts/cluster';
 import * as S from '../../assets/typescripts/spot_controllers'
+import * as J from '../../assets/typescripts/spot_controllers_java'
  
 
 @IonicPage()
@@ -26,6 +27,10 @@ export class AccueilPage implements OnInit {
   ngOnInit(): void {
     // Initialisation des variables utilisées sur la carte 
     var all_spots;
+    var minute,aine,pass,elec,refresh,route,Libre,tableaumarker=[];
+    minute = new L.LayerGroup;
+    aine = new L.LayerGroup;
+    pass = new L.LayerGroup;
     this.restapiService.getData(this.urlApi+"/spots").subscribe(res => all_spots = res);
 
 
@@ -50,7 +55,6 @@ export class AccueilPage implements OnInit {
     map.on('locationfound',onLocationFound);
     map.locate({setView:true, maxZoom: 16}) 
 
-
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
     var locate_button = new L.Control.EasyButton({
       id: 'locate_button',  
@@ -70,14 +74,9 @@ export class AccueilPage implements OnInit {
     locate_button.addTo(map);
 
     /* --------------------- Implémentation bouttons Statioguide --------------------- */
-    var test_markers = L.layerGroup([
-    L.marker([48.53228665699862,7.72891402244568]),
-    L.marker([48.532130355277786,7.7288925647735605]),
-    L.marker([48.53212325064263,7.728538513183595]),
-    L.marker([48.532265343156006,7.728549242019654]),
-    ]);
-    
-    var cluster_flash = C.create_cluster();
+    var cluster_elec = C.create_cluster();
+    var cluster_minute = C.create_cluster();
+    var cluster_pass = C.create_cluster();
 
     var flashButton = new L.Control.EasyButton({
       id: 'button1',  
@@ -88,8 +87,8 @@ export class AccueilPage implements OnInit {
             icon:      'fa-bolt',        
             title:     'not-flash',       
             onClick: function(btn, map) { 
-              S.createSpotsMarkers(all_spots,cluster_flash);
-              map.addLayer(cluster_flash);
+              J.get_elec(all_spots,cluster_elec);
+              map.addLayer(cluster_elec);
               btn.state('flash');    
               }
             },{
@@ -97,9 +96,9 @@ export class AccueilPage implements OnInit {
             icon:      'fa-bolt',
             title:     'flash',
             onClick: function(btn, map) {
-              cluster_flash.clearLayers();
-              map.removeLayer(cluster_flash);
-              cluster_flash.removeLayers;
+              cluster_elec.clearLayers();
+              map.removeLayer(cluster_elec);
+              cluster_elec.removeLayers;
               btn.state('noflash');
               }
             }]
@@ -114,8 +113,8 @@ export class AccueilPage implements OnInit {
             icon:      'fa-clock-o',               // and define its properties
             title:     'not-chrono',      // like its title
             onClick: function(btn, map) {       // and its callback
-              map.setView([46.25,-121.8],10);
-              map.addLayer(test_markers);
+              J.get_minute(all_spots,cluster_minute);
+              map.addLayer(cluster_minute);              
               btn.state('chrono');    // change state on click!
               }
             },{
@@ -123,9 +122,10 @@ export class AccueilPage implements OnInit {
             icon:      'fa-clock-o',
             title:     'chrono',
             onClick: function(btn, map) {
-                map.setView([42.3748204,-71.1161913],16);
-                map.removeLayer(test_markers);
-                btn.state('nochrono');
+              cluster_minute.clearLayers();
+              map.removeLayer(cluster_minute);
+              cluster_minute.removeLayers;
+              btn.state('nochrono');
             }
           }]
     });
@@ -139,8 +139,8 @@ export class AccueilPage implements OnInit {
             icon:      'fa-wheelchair',               // and define its properties
             title:     'not-handi',      // like its title
             onClick: function(btn, map) {       // and its callback
-              map.setView([46.25,-121.8],10);
-              map.addLayer(test_markers);
+              J.get_pass(all_spots,cluster_pass);
+              map.addLayer(cluster_pass);
               btn.state('handi');    // change state on click!
             }
             },{
@@ -148,8 +148,9 @@ export class AccueilPage implements OnInit {
             icon:      'fa-wheelchair',
             title:     'handi',
             onClick: function(btn, map) {
-              map.setView([42.3748204,-71.1161913],16);
-              map.removeLayer(test_markers);
+              cluster_pass.clearLayers();
+              map.removeLayer(cluster_pass);
+              cluster_pass.removeLayers;
               btn.state('nohandi');
             }
           }]
@@ -165,8 +166,10 @@ export class AccueilPage implements OnInit {
 
     /* --- Get data on click --- */ 
     function onclick(e){
-      var spot_data = S.getAllSpots(all_spots);
-      console.log(spot_data); 
+      J.getAllSpots(all_spots)
+      
+      // var spot_data = S.getAllSpots(all_spots);
+      // console.log(spot_data); 
     }
 
     map.on('click', onclick); 

@@ -1,5 +1,5 @@
 //fonction qui permet de clusterizer les marker en groupe
-function clusterize(){
+export function clusterize(){
   clusters = L.markerClusterGroup({
     polygonOptions: {
         fillColor: '#3887be',
@@ -56,5 +56,4 @@ function clusterize(){
   },
  
 });
-
 }

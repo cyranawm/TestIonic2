@@ -10,10 +10,12 @@ module.exports = () => {
 }
 
 /*Emplacements choisis : */
-  var S1 = ["Statio'Pass",7.72891402244568 ,48.53228665699862];
-  var S2 = ["Statio'Minute",7.7288925647735605, 48.532130355277786];
-  var S3 = ["Statio'Pass",7.728538513183595, 48.53212325064263];
-  var S4 = ["Statio'Minute",7.728549242019654, 48.532265343156006];
+  // var S1 = ["Statio'Pass",8 ,49];
+  var S1 = ["Statio'Minute",8 ,49];
+  var S2 = ["Statio'Minute",7, 48];
+  // var S3 = ["Statio'Pass",8, 49];
+  var S3 = ["Statio'Minute",8, 49];
+  var S4 = ["Statio'Minute",7, 48];
 
 /*Implémentation de 10 spots dans la BDD */
 module.exports = () => {
@@ -21,6 +23,7 @@ module.exports = () => {
   data.spots.push({
     id:1,
     spot_type:S1[0],
+    libre : 0,
     comments:"STP.0001.FR.10/03/05",
     location:{
       id:19,
@@ -57,6 +60,7 @@ module.exports = () => {
     id:2,
     spot_type:S2[0],
     comments:"STP.0001.FR.10/03/05",
+    libre : 1,
     location:{
       id:19,
       gps:{
@@ -92,6 +96,7 @@ module.exports = () => {
     id:3,
     spot_type:S3[0],
     comments:"STP.0001.FR.10/03/05",
+    libre : 0,
     location:{
       id:19,
       gps:{
@@ -127,6 +132,7 @@ module.exports = () => {
     id:4,
     spot_type:S4[0],
     comments:"STP.0001.FR.10/03/05",
+    libre : 1,
     location:{
       id:19,
       gps:{

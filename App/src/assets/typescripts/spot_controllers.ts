@@ -23,7 +23,7 @@ export function getAllSpots(data){
 export function createSpotsMarkers(data,cluster:L.MarkerClusterGroup){
   var spots = getAllSpots(data);
 
-  var LibreMinute = new L.Icon({
+  var LibreMinute = L.icon({
     iconUrl: '../images/borne-libre-statiominute.png',
     iconAnchor: [10, 48],
     popupAnchor:  [0, -50] 
@@ -38,7 +38,7 @@ export function createSpotsMarkers(data,cluster:L.MarkerClusterGroup){
   var DecoMinute = L.icon({
     iconUrl: '../images/borne_veille_statiominute.png',
     iconAnchor: [10, 48],
-    popupAnchor:  [0, -50]  
+    popupAnchor:  [0, -50] 
   });
 
   for (let k in spots){
@@ -54,8 +54,7 @@ export function createSpotsMarkers(data,cluster:L.MarkerClusterGroup){
         var Icone=OccupeMinute;
         var etat="Occupé";
         var statecluster="occupe";
-        // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';
-
+        // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
       }
 
       else if(/*spot[value.id].vehicle_detected.value=="0" */ 1){
@@ -66,11 +65,11 @@ export function createSpotsMarkers(data,cluster:L.MarkerClusterGroup){
         // var button = '<br><a class="waves-effect waves-light btn green modal-trigger" onClick="reserver('+value.id+","+devicenumber+","+value.latitude+","+value.longitude+')"><span class="white-text">Réserver</span></a><a class="waves-effect waves-light btn green modal-trigger" onClick="calcitineraire('+value.id+','+value.latitude+','+value.longitude+')"><span class="white-text">Itinéraire</span></a>'
       }
 
+      // VOir comment rajouter des options sur un marker pour le gérer dans les clusters
+      // marker.option.statcluster
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon: LibreMinute})
         .bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat/*+button*/+"<br> Plage de fonctionnement : Chargement...")
         .openPopup();
-        
-        
         cluster.addLayer(marker)
     }
   }

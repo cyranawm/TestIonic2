@@ -26,6 +26,10 @@ export class AccueilPage implements OnInit {
   
   ngOnInit(): void {
     // Initialisation des variables utilisées sur la carte 
+    var Location_marker = new L.Marker(L.latLng(0,0));
+    Location_marker.bindPopup("Vous êtes ici");
+    var Location_circle = new L.Circle(L.latLng(0,0),0);
+
     var all_spots;
     var minute,aine,pass,elec,refresh,route,Libre,tableaumarker=[];
     minute = new L.LayerGroup;
@@ -33,16 +37,19 @@ export class AccueilPage implements OnInit {
     pass = new L.LayerGroup;
     this.restapiService.getData(this.urlApi+"/spots").subscribe(res => all_spots = res);
 
-
     
     /* ------------------------- Initialisation de la carte ------------------------- */
     var map = L.map('map',{zoomControl:false })
     L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png").addTo(map);
 
     function onLocationFound(e): void {
+      if (map.hasLayer(Location_marker))
+        map.removeLayer(Location_marker);
+      if (map.hasLayer(Location_circle))
+        map.removeLayer(Location_circle);
       var radius = e.accuracy / 2;
-      var Location_marker = new L.Marker(e.latlng);
-      var Location_circle = new L.Circle(e.latlng,radius);
+      Location_marker.setLatLng(e.latlng);
+      Location_circle.setLatLng(e.latlng).setRadius(radius);
       map.addLayer(Location_marker);
       Location_marker.bindPopup("Vous êtes ici");
       map.addLayer(Location_circle);
@@ -53,6 +60,7 @@ export class AccueilPage implements OnInit {
     }
 
     map.on('locationfound',onLocationFound);
+    map.on('locationerror',onLocationError);
     map.locate({setView:true, maxZoom: 16}) 
 
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
@@ -87,6 +95,7 @@ export class AccueilPage implements OnInit {
             icon:      'fa-bolt',        
             title:     'not-flash',       
             onClick: function(btn, map) { 
+
               J.get_elec(all_spots,cluster_elec);
               map.addLayer(cluster_elec);
               btn.state('flash');    
@@ -168,8 +177,8 @@ export class AccueilPage implements OnInit {
     function onclick(e){
       J.getAllSpots(all_spots)
       
-      // var spot_data = S.getAllSpots(all_spots);
-      // console.log(spot_data); 
+      var spot_data = S.getAllSpots(all_spots);
+      console.log(spot_data); 
     }
 
     map.on('click', onclick); 

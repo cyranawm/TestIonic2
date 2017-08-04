@@ -11,8 +11,8 @@ module.exports = () => {
 
 /*Emplacements choisis : */
   // var S1 = ["Statio'Pass",8 ,49];
-  var S1 = ["Statio'Minute",8 ,49];
-  var S2 = ["Statio'Minute",7, 48];
+  var S1 = ["Statio'Minute",8.1 ,49];
+  var S2 = ["Statio'Minute",7.1, 48];
   // var S3 = ["Statio'Pass",8, 49];
   var S3 = ["Statio'Minute",8, 49];
   var S4 = ["Statio'Minute",7, 48];

@@ -25,19 +25,19 @@ export function get_minute(data, cluster){
   //Declaration des différentes images
   var spots = getAllSpots(data);
   var LibreMinute = L.icon({
-      iconUrl : '../images/borne_libre_statiominute.png',
+      iconUrl : 'assets/images/borne_libre_statiominute.png',
       iconAnchor: [10, 48],
       popupAnchor:  [0, -50] 
     });
 
   var OccupeMinute = L.icon({
-    iconUrl : '../images/borne_occupe_statiominute.png',
+    iconUrl : 'assets/images/borne_occupe_statiominute.png',
     iconAnchor: [10, 48],
     popupAnchor:  [0, -50] 
   });
   
   var DecoMinute = L.icon({
-    iconUrl : '../images/borne_veille_statiominute.png',
+    iconUrl : 'assets/images/borne_veille_statiominute.png',
     iconAnchor: [10, 48],
     popupAnchor:  [0, -50] 
   });
@@ -78,24 +78,24 @@ export function get_elec(data, cluster){
   var spots = getAllSpots(data);
   //Declaration des différentes images
   var Libre = L.icon({
-            iconUrl: '../images/borne_libre.png',
+            iconUrl: 'assets/images/borne_libre.png',
              iconAnchor: [10, 48],
               popupAnchor:  [0, -50] 
            });
   var LibreElec = L.icon({
-            iconUrl: '../images/borne_libre_statioelec.png',
+            iconUrl: 'assets/images/borne_libre_statioelec.png',
              iconAnchor: [10, 48],
               popupAnchor:  [0, -50]  
            });
 
     var OccupeElec = L.icon({
-            iconUrl: '../images/borne_occupe_statioelec.png',
+            iconUrl: 'assets/images/borne_occupe_statioelec.png',
              iconAnchor: [10, 48],
               popupAnchor:  [0, -50]  
            });
 
     var DecoElec = L.icon({
-            iconUrl: '../images/borne_veille_statioelec.png',
+            iconUrl: 'assets/images/borne_veille_statioelec.png',
              iconAnchor: [10, 48],
               popupAnchor:  [0, -50] 
            });
@@ -136,25 +136,25 @@ export function get_pass(data, cluster){
   var spots = getAllSpots(data);
   //Declaration des différentes images
   var Libre = L.icon({
-          iconUrl: '../images/borne_libre.png',
+          iconUrl: 'assets/images/borne_libre.png',
             iconAnchor: [10, 48],
             popupAnchor:  [0, -50] 
           });
 
   var LibrePass = L.icon({
-          iconUrl: '../images/borne_libre_statiopass.png',
+          iconUrl: 'assets/images/borne_libre_statiopass.png',
             iconAnchor: [10, 48],
             popupAnchor:  [0, -50] 
           });
 
   var OccupePass = L.icon({
-          iconUrl: '../images/borne_occupe_statiopass.png',
+          iconUrl: 'assets/images/borne_occupe_statiopass.png',
             iconAnchor: [10, 48],
             popupAnchor:  [0, -50]  
           });
 
   var DecoPass = L.icon({
-          iconUrl: '../images/borne_veille_statiopass.png',
+          iconUrl: 'assets/images/borne_veille_statiopass.png',
             iconAnchor: [10, 48],
           popupAnchor:  [0, -50] 
           });

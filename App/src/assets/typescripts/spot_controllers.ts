@@ -24,19 +24,19 @@ export function createSpotsMarkers(data,cluster:L.MarkerClusterGroup){
   var spots = getAllSpots(data);
 
   var LibreMinute = L.icon({
-    iconUrl: '../images/borne-libre-statiominute.png',
+    iconUrl: 'assets/images/borne-libre-statiominute.png',
     iconAnchor: [10, 48],
     popupAnchor:  [0, -50] 
   });
 
   var OccupeMinute = L.icon({
-    iconUrl: '../images/borne_occupe_statiominute.png',
+    iconUrl: 'assets/images/borne_occupe_statiominute.png',
     iconAnchor: [10, 48],
     popupAnchor:  [0, -50] 
   });
 
   var DecoMinute = L.icon({
-    iconUrl: '../images/borne_veille_statiominute.png',
+    iconUrl: 'assets/images/borne_veille_statiominute.png',
     iconAnchor: [10, 48],
     popupAnchor:  [0, -50] 
   });

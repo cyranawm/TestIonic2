@@ -2,7 +2,7 @@
 import * as _ from 'underscore'
 
 export function create_cluster(){
-    var cluster = new L.markerClusterGroup({
+    var cluster = L.markerClusterGroup({
         polygonOptions: {
             fillColor: '#3887be',
             color: '#3887be',
@@ -10,7 +10,6 @@ export function create_cluster(){
             opacity: 1,
             fillOpacity: 0.5
         },disableClusteringAtZoom: 18,
-        
     iconCreateFunction: function (cluster) {
         var childMarkers = cluster.getAllChildMarkers()
         var counts = _.countBy(childMarkers, function(marker) {
@@ -54,7 +53,6 @@ export function create_cluster(){
     else{
        var classname="marker-cluster marker-cluster-orange";
     }
- 
     return L.divIcon({ html: "<p>"+counts.libre+" / "+total+"</p>",className: classname, iconSize: L.point(40, 40)});
     },
   });

@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class RestApiServiceProvider {
   public
-    url = "http://localhost:3000/"
-    // url = "https://api.technolia.fr/"
+    // url = "http://localhost:3000/"
+    url = "https://api.technolia.fr/"
 
   constructor(public http: Http) {
   }
@@ -15,7 +15,7 @@ export class RestApiServiceProvider {
   getSpots(){
     var header = new Headers({ accept : 'application/json'});
     var options = new RequestOptions({ headers: header,method : 'get'});
-    var data = this.http.get(this.url + "spots?limit=10000",/*options*/)
+    var data = this.http.get("https://api.technolia.fr/spots?limit=10000",options)
       .map((res:Response) => res.json())
       .catch(this.handleError);
     return data;

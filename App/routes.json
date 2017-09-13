@@ -1,6 +1,5 @@
 {
   "/api/": "/",
-  "/blog/:resource/:id/show": "/:resource/:id",
-  "/blog/:category": "/posts?category=:category",
-  "/markers/":"/markers"
+  "/spots/logs/current_statuses" : "/logs",
+  "/spots/logs/current_statuses/:id" : "/logs/:id"
 }

@@ -77,7 +77,7 @@ page-accueil {
 }
 
 .marker-cluster-orange {
-	 text-align: center;
+	text-align: center;
 	background-color: rgba(241, 211, 87, 0.9);
 }
 
@@ -94,8 +94,9 @@ page-accueil {
 
 //  Style Routing machine :
 .leaflet-routing-container, .leaflet-routing-error {
-    width: 320px;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 10px;
+    height: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
     padding-top: 4px;
     transition: all 0.2s ease;
     box-sizing: border-box;
@@ -352,4 +353,22 @@ page-accueil {
         height: 100%;
         float: bottom;
     }
+}
+
+.marker-button {
+    border-style: solid;
+    border-radius: 7px;
+    border-width: 3px;
+    border-color: rgba(0,140,0,1);
+    background-color: rgba(0,140,0,1);
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #888888;
+    align-content: left
+    ;
+    
+}
+
+.white-text {
+    color:  white;
 }

@@ -1,7 +1,7 @@
 /*Test : */
 module.exports = () => {
-  const data = { logs : []}
-  data.logs.push({
+  const data = { markers : []}
+  data.markers.push({
     id : 10,
     title: "Coucou",
     author : "Lucas",
@@ -19,8 +19,8 @@ module.exports = () => {
 
 /*Implémentation de 10 spots dans la BDD */
 module.exports = () => {
-  const data = { spots: [] }
-  data.spots.push({
+  const data_2 = { spots: [] }
+  data_2.spots.push({
     id:1,
     spot_type:S1[0],
     libre : 0,
@@ -56,7 +56,7 @@ module.exports = () => {
     }
   })
 
-  data.spots.push({
+  data_2.spots.push({
     id:2,
     spot_type:S2[0],
     comments:"STP.0001.FR.10/03/05",
@@ -92,7 +92,7 @@ module.exports = () => {
     }
   })
 
-  data.spots.push({
+  data_2.spots.push({
     id:3,
     spot_type:S3[0],
     comments:"STP.0001.FR.10/03/05",
@@ -128,7 +128,7 @@ module.exports = () => {
     }
   })
 
-  data.spots.push({
+  data_2.spots.push({
     id:4,
     spot_type:S4[0],
     comments:"STP.0001.FR.10/03/05",
@@ -164,6 +164,6 @@ module.exports = () => {
     }
   })
 
-  return data
+  return data_2
 }
 

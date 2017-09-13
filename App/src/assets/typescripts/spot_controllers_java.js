@@ -1,24 +1,23 @@
 import 'leaflet';
 import 'leaflet-easybutton';
 import 'leaflet.markercluster';
-import 'leaflet-routing-machine'
+import 'leaflet-routing-machine';
 
 export function getAllSpots(data,pos){
   var spots = new Array();
   for(let index in data){  
     if (data[index]["location"]["gps"]["latitude"] != null ) {
-      // d = get_distance_m(data[index]["location"]["gps"]["latitude"], data[index]["location"]["gps"]["longitude"],pos.lat,pos.lng)    
-      // console.log(d)
-      // console.log(pos.lat)
-      spots.push({
-        "lat" : data[index]["location"]["gps"]["latitude"],
-        "lng" : data[index]["location"]["gps"]["longitude"],
-        "id" : data[index]["id"],
-        "type_spot" : data[index]["spot_type"],
-        "address" : data[index]["location"]["address"],
-        "city" : data[index]["location"]["town"],
-        "links" : data[index]["links"]["device"]["href"],
-      });     
+      var d = get_distance_m(data[index]["location"]["gps"]["latitude"], data[index]["location"]["gps"]["longitude"],pos.lat,pos.lng)    
+        spots.push({
+          "lat" : data[index]["location"]["gps"]["latitude"],
+          "lng" : data[index]["location"]["gps"]["longitude"],
+          "id" : data[index]["id"],
+          "type_spot" : data[index]["spot_type"],
+          "address" : data[index]["location"]["address"],
+          "city" : data[index]["location"]["town"],
+          "links" : data[index]["links"]["device"]["href"],
+          "dist" : d
+        });     
     }
   }
   return(spots)
@@ -69,8 +68,7 @@ export function get_minute(data,cluster,pos,stat){
   });
 
   for (let k in spots){
-    if (spots[k].type_spot == "Statio'Minute"){
-
+    if ((spots[k].type_spot == "Statio'Minute") && (spots[k].dist <= 20) ){
       if(statuts[k].connected ==0){
         var Icone=DecoMinute;
         var etat="Informations indisponibles";
@@ -128,7 +126,7 @@ export function get_elec(data, cluster,pos,stat){
   });
 
   for (let k in spots){
-    if (spots[k].type_spot == "Statio'Elec"){
+    if ((spots[k].type_spot == "Statio'Elec") && (spots[k].dist <= 20)){
       if(statuts[k].connected ==0){
         var Icone=DecoElec;
         var etat="Informations indisponibles";
@@ -188,31 +186,34 @@ export function get_pass(data,cluster,pos,stat){
           });
 
   for (let k in spots){
-    if(statuts[k].connected ==0){
-      if(/* Test disponibilité : spot[value.id].connected.value=="0"*/ spots[k].libre == 2 ){
+    if ((spots[k].type_spot == "Statio'Pass")&& (spots[k].dist <= 20)){      
+      if(statuts[k].connected ==0){
         var Icone=DecoPass;
         var etat="Informations indisponibles";
         var statecluster="indisponibles";
         var button = "";
       }
-
       else if (statuts[k].vehicle_detected == 1) {
         var Icone=OccupePass;
         var etat="Occupé";
         var statecluster="occupe";
+        // var button = '<a class="marker-button" ><span class="white-text" > Réserver </span></a> <a class="marker-button" ><span class="white-text"> Itinéraire </span></a>';
+        ; 
+        
         // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
       }
-
       else if(statuts[k].vehicle_detected == 0){
         var Icone=LibrePass;
         var etat="Libre";
         var statecluster="libre";
+        var button = "";
+        
         // var button = '<br><a class="waves-effect waves-light btn green modal-trigger" onClick="reserver('+value.id+","+devicenumber+","+value.latitude+","+value.longitude+')"><span class="white-text">Réserver</span></a><a class="waves-effect waves-light btn green modal-trigger" onClick="calcitineraire('+value.id+','+value.latitude+','+value.longitude+')"><span class="white-text">Itinéraire</span></a>'
       }
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon : Icone, statecluster : statecluster})
-        .bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat/*+button*/+"<br> Plage de fonctionnement : Chargement...")
+        .bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat+"<br>"+/*button+*/"<br> Plage de fonctionnement : Chargement...")
         .openPopup();
-        cluster.addLayer(marker)
+      cluster.addLayer(marker)
     }
   }
 }
@@ -223,14 +224,15 @@ export function deg2rad(x){
 }
  
 export function get_distance_m(lat1, lng1, lat2, lng2) {
-  earth_radius = 6378137; 
-  lo1 = deg2rad(lng1);    
-  la1 = deg2rad(lat1);
-  lo2 = deg2rad(lng2);
-  la2 = deg2rad(lat2);
-  dlo = (lo2 - lo1) / 2;
-  dla = (la2 - la1) / 2;
-  a = (Math.sin(dla) * Math.sin(dla)) + Math.cos(la1) * Math.cos(la2) * (Math.sin(dlo) * Math.sin(dlo));
-  d = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  return (earth_radius * d);
+  var earth_radius = 6378.137; 
+  var lo1 = deg2rad(lng1);    
+  var la1 = deg2rad(lat1);
+  var lo2 = deg2rad(lng2);
+  var la2 = deg2rad(lat2);
+  var d = Math.acos(Math.sin(la1)*Math.sin(la2) + Math.cos(la1)*Math.cos(la2)*Math.cos(lo1-lo2));
+  // var dlo = (lo2 - lo1) / 2;
+  // var dla = (la2 - la1) / 2;
+  // var a = (Math.sin(dla) * Math.sin(dla)) + Math.cos(la1) * Math.cos(la2) * (Math.sin(dlo) * Math.sin(dlo));
+  // var d2 = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return (earth_radius*d);
 }

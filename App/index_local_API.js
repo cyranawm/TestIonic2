@@ -1,12 +1,7 @@
 /*Test : */
 module.exports = () => {
-<<<<<<< HEAD
   const data = { markers : []}
   data.markers.push({
-=======
-  const data = {posts: []}
-  data.posts.push({
->>>>>>> parent of a99b1006... Affichage des cluster avec les données en ligne fonctionnel
     id : 10,
     title: "Coucou",
     author : "Lucas",
@@ -15,11 +10,11 @@ module.exports = () => {
 }
 
 /*Emplacements choisis : */
-  // var S1 = ["Statio'Pass",8 ,49];
-  var S1 = ["Statio'Minute",8.1 ,49];
+  var S1 = ["Statio'Pass",8 ,49];
+  // var S1 = ["Statio'Minute",8.1 ,49];
   var S2 = ["Statio'Minute",7.1, 48];
-  // var S3 = ["Statio'Pass",8, 49];
-  var S3 = ["Statio'Minute",8, 49];
+  var S3 = ["Statio'Pass",8, 49];
+  // var S3 = ["Statio'Minute",8, 49];
   var S4 = ["Statio'Minute",7, 48];
 
 /*Implémentation de 10 spots dans la BDD */

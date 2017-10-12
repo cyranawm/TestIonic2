@@ -1,5 +1,3 @@
-
-
 //recupere toute les places en fonction de la latitude et longitude passez en parametre
 function getspot(lat,lng){
   var Icone=Libre;

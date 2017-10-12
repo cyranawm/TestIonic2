@@ -12,9 +12,9 @@ require 'rest-client'
           :accept => 'application/json'
           }))
 
-      spot = requete.to_json
-      spot=JSON.parse(spot)
-      spot=spot["spots"]
+       spot = requete.to_json
+       spot=JSON.parse(spot)
+       spot=spot["spots"]
       tableau= Array.new
       for spot in spot
             lat = spot["location"]["gps"]["latitude"]

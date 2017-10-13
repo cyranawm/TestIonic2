@@ -68,7 +68,7 @@ export function get_minute(data,cluster,pos,stat){
   });
 
   for (let k in spots){
-    if ((spots[k].type_spot == "Statio'Minute") && (spots[k].dist <= 20) ){
+    if ((spots[k].type_spot == "Statio'Minute") && (spots[k].dist <= 1000) ){
       if(statuts[k].connected ==0){
         var Icone=DecoMinute;
         var etat="Informations indisponibles";
@@ -126,7 +126,7 @@ export function get_elec(data, cluster,pos,stat){
   });
 
   for (let k in spots){
-    if ((spots[k].type_spot == "Statio'Elec") && (spots[k].dist <= 20)){
+    if ((spots[k].type_spot == "Statio'Elec") && (spots[k].dist <= 1000)){
       if(statuts[k].connected ==0){
         var Icone=DecoElec;
         var etat="Informations indisponibles";
@@ -186,7 +186,7 @@ export function get_pass(data,cluster,pos,stat){
           });
 
   for (let k in spots){
-    if ((spots[k].type_spot == "Statio'Pass")&& (spots[k].dist <= 20)){      
+    if ((spots[k].type_spot == "Statio'Pass")&& (spots[k].dist <= 1000)){      
       if(statuts[k].connected ==0){
         var Icone=DecoPass;
         var etat="Informations indisponibles";

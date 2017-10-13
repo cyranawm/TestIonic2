@@ -31,9 +31,9 @@ export class AccueilPage implements OnInit {
     var all_spots;
     var current_pos;
     var spot_statuts;
-    this.restapiService.getSpots().subscribe(res => {all_spots = res["spots"]; 
+    this.restapiService.getSpots().subscribe(res => {all_spots = res; 
                                                       console.log(all_spots);});
-    this.restapiService.getStatuts().subscribe(res => {spot_statuts = res["statuses"];
+    this.restapiService.getStatuts().subscribe(res => {spot_statuts = res;
                                                         console.log(spot_statuts)});
     
 
@@ -184,6 +184,6 @@ export class AccueilPage implements OnInit {
       }).addTo(map)
     }
 
-    map.on('click', draw_it); 
+    //map.on('click', draw_it); 
   }
 }

@@ -197,9 +197,9 @@ export function get_pass(data,cluster,pos,stat){
         var Icone=OccupePass;
         var etat="Occupé";
         var statecluster="occupe";
-        // var button = '<a class="marker-button" ><span class="white-text" > Réserver </span></a> <a class="marker-button" ><span class="white-text"> Itinéraire </span></a>';
-        ; 
-        
+        var button = '<a class="marker-button" ><span class="white-text" > Réserver </span></a> <a class=marker-button href=http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng+
+'><span class="white-text"> Itinéraire </span></a>';
+        console.log(button);
         // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
       }
       else if(statuts[k].vehicle_detected == 0){
@@ -211,7 +211,7 @@ export function get_pass(data,cluster,pos,stat){
         // var button = '<br><a class="waves-effect waves-light btn green modal-trigger" onClick="reserver('+value.id+","+devicenumber+","+value.latitude+","+value.longitude+')"><span class="white-text">Réserver</span></a><a class="waves-effect waves-light btn green modal-trigger" onClick="calcitineraire('+value.id+','+value.latitude+','+value.longitude+')"><span class="white-text">Itinéraire</span></a>'
       }
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon : Icone, statecluster : statecluster})
-        .bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat+"<br>"+/*button+*/"<br> Plage de fonctionnement : Chargement...")
+        .bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat+"<br>"+button+"<br> Plage de fonctionnement : Chargement...")
         .openPopup();
       cluster.addLayer(marker)
     }

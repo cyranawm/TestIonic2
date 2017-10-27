@@ -6,6 +6,7 @@ import { MyApp } from './app.component';
 import { AccueilPage } from "../pages/accueil/accueil";
 import { AidePage } from "../pages/aide/aide";
 import { ConnexionPage } from "../pages/connexion/connexion";
+import { BookingPage } from "../pages/booking/booking";
 import { InscriptionPage } from "../pages/inscription/inscription";
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,6 +16,7 @@ import { MonComptePage } from "../pages/mon-compte/mon-compte";
 import { AuthService } from './../providers/auth-service/auth-service';
 import { RestApiServiceProvider } from '../providers/rest-api-service/rest-api-service';
 import { HttpModule } from '@angular/http';
+import { BookingComponent } from '../components/booking/booking';
 
 
 
@@ -25,10 +27,12 @@ import { HttpModule } from '@angular/http';
     AccueilPage,
     AidePage,
     ConnexionPage,
+    BookingPage,
     InscriptionPage,
     TabsPage,
     MonComptePage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    BookingComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +45,7 @@ import { HttpModule } from '@angular/http';
     AccueilPage,
     AidePage,
     ConnexionPage,
+    BookingPage,
     InscriptionPage,
     TabsPage,
     MonComptePage,

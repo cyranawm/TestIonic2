@@ -1,3 +1,31 @@
 booking {
 
+.white-text {
+    color:  white;
+}
+
+.itineraire-button {
+    border-style: solid;
+    border-radius: 7px;
+    border-width: 3px;
+    border-color: rgba(0,140,0,1);
+    background-color: rgba(0,140,0,1);
+    font-size: 12px;
+    text-align: center;
+    align-content: left;
+    
+}
+
+.annul-button {
+    border-style: solid;
+    border-radius: 7px;
+    border-width: 3px;
+    border-color: rgba(140,0,0,1);
+    background-color: rgba(140,0,0,1);
+    font-size: 12px;
+    text-align: center;
+    align-content: left;
+    
+}
+
 }

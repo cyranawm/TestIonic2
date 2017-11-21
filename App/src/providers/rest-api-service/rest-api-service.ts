@@ -24,7 +24,7 @@ export class RestApiServiceProvider {
   getStatuts(){
     var header = new Headers({ accept : 'application/json'});
     var options = new RequestOptions({ headers: header,method : 'get'});
-    return this.http.get(this.url+"spots/logs/current_statuses",options)
+    return this.http.get(this.url+"logs",options)
       .map((res:Response) => res.json())
       .catch(this.handleError);
   };

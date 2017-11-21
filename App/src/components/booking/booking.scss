@@ -4,7 +4,7 @@ booking {
     color:  white;
 }
 
-.itineraire-button {
+#itineraire-button {
     border-style: solid;
     border-radius: 7px;
     border-width: 3px;
@@ -12,11 +12,10 @@ booking {
     background-color: rgba(0,140,0,1);
     font-size: 12px;
     text-align: center;
-    align-content: left;
     
 }
 
-.annul-button {
+#annul-button {
     border-style: solid;
     border-radius: 7px;
     border-width: 3px;
@@ -24,7 +23,6 @@ booking {
     background-color: rgba(140,0,0,1);
     font-size: 12px;
     text-align: center;
-    align-content: left;
     
 }
 

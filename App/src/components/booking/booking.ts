@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output,EventEmitter,AfterViewInit} from '@angular/core';
 
 /**
  * Generated class for the BookingComponent component.
@@ -10,20 +10,31 @@ import { Component, Input } from '@angular/core';
   selector: 'booking',
   templateUrl: 'booking.html'
 })
-export class BookingComponent {
+export class BookingComponent implements AfterViewInit {
 
- /* @Input('resa') book;
-
-	  login : string= this.book["login"];        
-	  spot_id : string= this.book["spot_id"];
-	  etat : string = this.book["etat"];
-	  time : string = this.book["time"];
-	  lat : string= this.book["lat"];
-	  lon : string= this.book["lon"];
-	  deviceid : string = this.book["deviceid"];
-	  modif_date : string= this.book["modif_date"];*/
+ 	@Input('resa') book;
+      
+	  spot_id : string;
+	  etat : string;
+	  time : string 
+	  lat : string;
+	  lon : string;
+	  it_url : string;
 
   constructor() {
+  	console.log('compo load');
+  }
+
+  ngAfterViewInit(){
+  	console.log('hello');
+  	console.log(this.book);
+  	this.spot_id = this.book["spot_id"];
+  	this.time = this.book["time"];
+  	this.lat = this.book["lat"];
+	this.lon =this.book["lon"];
+	this.it_url = 'http://maps.apple.com/?ll='+this.lat+','+this.lon+'>';
+	document.getElementById("itineraire-button")["href"] = this.it_url;
+
   }
 
 }

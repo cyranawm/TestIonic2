@@ -2,9 +2,13 @@ import 'leaflet';
 import 'leaflet-easybutton';
 import 'leaflet.markercluster';
 import 'leaflet-routing-machine';
+import { BookingdataProvider } from "../../providers/bookingdata/bookingdata";
+
+
 
 export function book(){
   console.log('je booke');
+  console.log(BookingdataProvider)
 }
 
 export function getAllSpots(data,pos){
@@ -208,7 +212,7 @@ export function get_pass(data,cluster,pos,stat){
         var container = L.DomUtil.create('div'),
           PopupTxt = createText(spots[k],etat,container),
           ItBtn = createButton('Itinéraire', container),
-          BookBtn = createButton('reserver', container);
+          BookBtn = createButton('Réserver', container);
         L.DomEvent.on(ItBtn, 'click', () => {
            console.log(spots[k]);
         });
@@ -248,7 +252,7 @@ export function createButton(label, container) {
 export function createText(spot,etat,container){
     console.log("text created");
     var txt = L.DomUtil.create('div', '', container);
-    txt.innerHTML = "Place n° "+spot.id+"<br>Ville : "+spot.city+"<br>Adresse : "+spot.address+"<br>Type de place : "+spot.type_spot+"<br> Etat : "+etat+"<br>"+"<br> Plage de fonctionnement : Chargement...";
+    txt.innerHTML = "Place n° "+spot.id+"<br>Ville : "+spot.city+"<br>Adresse : "+spot.address+"<br>Type de place : "+spot.type_spot+"<br> Etat : "+etat+"<br>"+"Plage de fonctionnement : Chargement...";
     return txt;
 }
  

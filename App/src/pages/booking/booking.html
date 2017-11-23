@@ -18,12 +18,35 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card>
+  <ion-card  *ngIf = "local_booking.is_booked">
     <ion-card-content>
+
       <ion-card-title>
-        Réservation en cours
+        Réservation en cours :
       </ion-card-title>
-     <booking [resa] = "book1" ></booking >
+
+      <li >
+          Spot réservé : {{local_booking.spot_id}}
+      </li>
+      <li >
+          Adresse : {{local_booking.adresse}}
+      </li>
+      <li >
+          Validité : {{local_booking.date}}
+      </li>
+      <br>
+
+      <div text-center>
+      <a class=itineraire-button ><span class="white-text"> Itinéraire </span></a>
+      &emsp;
+      <a class=annul-button (click)='cancel_booking();'><span class="white-text"> Annuler </span></a>
+      </div>
+
     </ion-card-content>
   </ion-card>
+
+  <div class="no-booking" *ngIf = "!(local_booking.is_booked)">
+      Pas de réservation en cours ...    
+  </div>
+    
 </ion-content>

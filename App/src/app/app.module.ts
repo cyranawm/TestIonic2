@@ -17,6 +17,7 @@ import { AuthService } from './../providers/auth-service/auth-service';
 import { RestApiServiceProvider } from '../providers/rest-api-service/rest-api-service';
 import { HttpModule } from '@angular/http';
 import { BookingComponent } from '../components/booking/booking';
+import { BookingdataProvider } from '../providers/bookingdata/bookingdata';
 
 
 
@@ -54,8 +55,10 @@ import { BookingComponent } from '../components/booking/booking';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},RestApiServiceProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    RestApiServiceProvider,
     AuthService,
+    BookingdataProvider,
       ]
 })
 export class AppModule {}

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { BookingdataProvider } from '../../providers/bookingdata/bookingdata';
+
 
 /**
  * Generated class for the BookingPage page.
@@ -13,24 +15,41 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'booking.html',
 })
 export class BookingPage {
+	
+	local_booking:any;
 
-  	book1 : any = {
-  		login : 'log',       
-	    spot_id : 1,
-	    etat : 'libre',
-	    time : null,
-	    lat : 7.7,
-	    lon : 48.5,
-	    deviceid : null,
-	    modif_date : null,
-	}
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  	console.log(this.book1)
+  constructor(public navCtrl: NavController, public navParams: NavParams, public BookingDataService : BookingdataProvider,public alertCtrl :AlertController) {
+		this.local_booking = this.BookingDataService.current_booking
+		console.log(this.local_booking)
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad BookingPage');
+		console.log('ionViewDidLoad BookingPage');
+		console.log(this.BookingDataService.current_booking)
   }
 
+	cancel_booking(){
+		let alert = this.alertCtrl.create({
+			title: 'Confirmation',
+			message: 'Voulez vous annuler la réservation ?',
+			buttons: [
+				{
+					text: 'Non',
+					role: 'cancel',
+					handler: () => {
+						console.log('Cancel clicked');
+					}
+				},
+				{
+					text: 'Oui',
+					handler: () => {
+						console.log('Booking deleted');
+						this.BookingDataService.update_booking(false,"/","/","/")
+					}
+				}
+			]
+		});
+		alert.present();
+	}
+	
 }

@@ -16,11 +16,7 @@ import { MonComptePage } from "../pages/mon-compte/mon-compte";
 import { AuthService } from './../providers/auth-service/auth-service';
 import { RestApiServiceProvider } from '../providers/rest-api-service/rest-api-service';
 import { HttpModule } from '@angular/http';
-import { BookingComponent } from '../components/booking/booking';
 import { BookingdataProvider } from '../providers/bookingdata/bookingdata';
-
-
-
 
 @NgModule({
   declarations: [
@@ -33,7 +29,6 @@ import { BookingdataProvider } from '../providers/bookingdata/bookingdata';
     TabsPage,
     MonComptePage,
     ForgotPasswordPage,
-    BookingComponent
   ],
   imports: [
     BrowserModule,

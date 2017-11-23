@@ -4,11 +4,15 @@ import 'leaflet.markercluster';
 import 'leaflet-routing-machine';
 import { BookingdataProvider } from "../../providers/bookingdata/bookingdata";
 
+var my_booking = {is_booked : false,id : "",address : ""};
 
 
-export function book(){
-  console.log('je booke');
-  console.log(BookingdataProvider)
+export function get_booking(){
+  return my_booking
+}
+
+export function cancel_booking(){
+  my_booking = {is_booked : false,id : "",address : ""};
 }
 
 export function getAllSpots(data,pos){
@@ -54,7 +58,6 @@ export function getAllStatuts(data){
 //fonction d'implementation des spots
 export function get_minute(data,cluster,pos,stat){
   console.log("Minute called")
-  //Declaration des différentes images
   var spots = getAllSpots(data,pos);
   var statuts = getAllStatuts(stat);
 
@@ -209,12 +212,19 @@ export function get_pass(data,cluster,pos,stat){
 '><span class="white-text"> Itinéraire </span></a>';
         // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
         var popi = L.popup();
+
         var container = L.DomUtil.create('div'),
           PopupTxt = createText(spots[k],etat,container),
           ItBtn = createButton('Itinéraire', container),
           BookBtn = createButton('Réserver', container);
+        L.DomEvent.on(BookBtn, 'click', () => {
+          my_booking.is_booked = true;
+          my_booking.id = spots[k].id;
+          my_booking.address = spots[k].address;
+        });
+
         L.DomEvent.on(ItBtn, 'click', () => {
-           console.log(spots[k]);
+            //  ...
         });
         popi.setContent(container);
       }
@@ -223,9 +233,6 @@ export function get_pass(data,cluster,pos,stat){
         var etat="Libre";
         var statecluster="libre";
         var button = "";
-        
-        
-        // var button = '<br><a class="waves-effect waves-light btn green modal-trigger" onClick="reserver('+value.id+","+devicenumber+","+value.latitude+","+value.longitude+')"><span class="white-text">Réserver</span></a><a class="waves-effect waves-light btn green modal-trigger" onClick="calcitineraire('+value.id+','+value.latitude+','+value.longitude+')"><span class="white-text">Itinéraire</span></a>'
       }
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon : Icone, statecluster : statecluster})
         //.bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat+"<br>"+button+"<br> Plage de fonctionnement : Chargement...")
@@ -235,7 +242,6 @@ export function get_pass(data,cluster,pos,stat){
     }
   }
 }
-
 
 export function deg2rad(x){
   return Math.PI*x/180;
@@ -263,10 +269,5 @@ export function get_distance_m(lat1, lng1, lat2, lng2) {
   var lo2 = deg2rad(lng2);
   var la2 = deg2rad(lat2);
   var d = Math.acos(Math.sin(la1)*Math.sin(la2) + Math.cos(la1)*Math.cos(la2)*Math.cos(lo1-lo2));
-  // var dlo = (lo2 - lo1) / 2;
-  // var dla = (la2 - la1) / 2;
-  // var a = (Math.sin(dla) * Math.sin(dla)) + Math.cos(la1) * Math.cos(la2) * (Math.sin(dlo) * Math.sin(dlo));
-  // var d2 = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return (earth_radius*d);
 }
-

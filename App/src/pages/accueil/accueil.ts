@@ -1,6 +1,8 @@
 import { Component , OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RestApiServiceProvider } from "../../providers/rest-api-service/rest-api-service";
+import { BookingdataProvider } from '../../providers/bookingdata/bookingdata';
+
 
 import 'leaflet';
 import 'leaflet-easybutton';
@@ -19,8 +21,11 @@ declare var L:any;
 })
 
 export class AccueilPage implements OnInit {
+  D = new Date().toISOString();
+  d_string =this.D.slice(8,10)+'/'+this.D.slice(5,7)+'/'+this.D.slice(0,4)+' - '+this.D.slice(11,16)
 
-  constructor(public navCtrl: NavController, public restapiService : RestApiServiceProvider) {
+  constructor(public navCtrl: NavController, public restapiService : RestApiServiceProvider,public BookingdataService : BookingdataProvider) {
+    setInterval(() => { this.draw_it(); }, 1000);  
   }
   
   ngOnInit(): void {
@@ -35,7 +40,6 @@ export class AccueilPage implements OnInit {
                                                       console.log(all_spots);});
     this.restapiService.getStatuts().subscribe(res => {spot_statuts = res;
                                                         console.log(spot_statuts)});
-    
 
     /* ------------------------- Initialisation de la carte ------------------------- */
     var map = L.map('map',{zoomControl:false })
@@ -62,9 +66,6 @@ export class AccueilPage implements OnInit {
     map.on('locationfound',onLocationFound);
     map.on('locationerror',onLocationError);
     map.locate({setView:true, maxZoom: 16})
-    
-
-
 
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
     new L.Control.EasyButton({
@@ -148,7 +149,6 @@ export class AccueilPage implements OnInit {
             icon:      'fa-wheelchair',   
             title:     'not-handi',      
             onClick: function(btn, map) { 
-              console.log(current_pos)
               J.get_pass(all_spots,cluster_pass,current_pos,spot_statuts);
               map.addLayer(cluster_pass);
               btn.state('handi');    
@@ -171,19 +171,10 @@ export class AccueilPage implements OnInit {
       chronoButton,
       handiButton,
     ]).addTo(map)
-
-
-    /* --- Get data on click --- */ 
-    function draw_it(){
-      console.log("draw it !")
-      var test = new L.Routing.Control({
-        waypoints : [
-          current_pos,
-          L.latLng(57.6792, 11.949),
-        ]
-      }).addTo(map)
-    }
-
-    //map.on('click', draw_it); 
+  }
+  
+  draw_it(){
+    var temp = J.get_booking();
+    this.BookingdataService.update_booking(temp.is_booked,temp.id,temp.address,this.d_string)
   }
 }

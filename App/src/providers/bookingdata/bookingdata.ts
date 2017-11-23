@@ -2,19 +2,13 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the BookingdataProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class BookingdataProvider {
   current_booking = {
-    is_booked : true,
-    spot_id : 1,
-    adresse : "2 rue de la Rheimatt",
-    date : "22/11/2017"
+    is_booked : false,
+    spot_id : "",
+    adresse : "",
+    date : ""
   }
   constructor(public http: Http) {
     console.log('Hello BookingdataProvider Provider');

@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { BookingdataProvider } from '../../providers/bookingdata/bookingdata';
 
+import * as J from '../../assets/typescripts/spot_controllers_java';
 
-/**
- * Generated class for the BookingPage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-booking',
@@ -20,12 +16,10 @@ export class BookingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public BookingDataService : BookingdataProvider,public alertCtrl :AlertController) {
 		this.local_booking = this.BookingDataService.current_booking
-		console.log(this.local_booking)
   }
 
   ionViewDidLoad() {
 		console.log('ionViewDidLoad BookingPage');
-		console.log(this.BookingDataService.current_booking)
   }
 
 	cancel_booking(){
@@ -45,6 +39,7 @@ export class BookingPage {
 					handler: () => {
 						console.log('Booking deleted');
 						this.BookingDataService.update_booking(false,"/","/","/")
+						J.cancel_booking();
 					}
 				}
 			]

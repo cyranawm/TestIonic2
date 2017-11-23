@@ -206,10 +206,11 @@ export function get_pass(data,cluster,pos,stat){
         // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
         var popi = L.popup();
         var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
           ItBtn = createButton('Itinéraire', container),
           BookBtn = createButton('reserver', container);
         L.DomEvent.on(ItBtn, 'click', () => {
-           console.log(deg2rad(176));
+           console.log(spots[k]);
         });
         popi.setContent(container);
       }
@@ -237,11 +238,18 @@ export function deg2rad(x){
 }
 
 export function createButton(label, container) {
-    console.log("button created")
+    console.log("button created");
     var btn = L.DomUtil.create('button', '', container);
     btn.setAttribute('type', 'button');
     btn.innerHTML = label;
     return btn;
+}
+
+export function createText(spot,etat,container){
+    console.log("text created");
+    var txt = L.DomUtil.create('div', '', container);
+    txt.innerHTML = "Place n° "+spot.id+"<br>Ville : "+spot.city+"<br>Adresse : "+spot.address+"<br>Type de place : "+spot.type_spot+"<br> Etat : "+etat+"<br>"+"<br> Plage de fonctionnement : Chargement...";
+    return txt;
 }
  
 export function get_distance_m(lat1, lng1, lat2, lng2) {

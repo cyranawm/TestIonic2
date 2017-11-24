@@ -217,6 +217,8 @@ export function get_pass(data,cluster,pos,stat){
           PopupTxt = createText(spots[k],etat,container),
           ItBtn = createButton('Itinéraire', container),
           BookBtn = createButton('Réserver', container);
+
+
         L.DomEvent.on(BookBtn, 'click', () => {
           my_booking.is_booked = true;
           my_booking.id = spots[k].id;
@@ -224,8 +226,9 @@ export function get_pass(data,cluster,pos,stat){
         });
 
         L.DomEvent.on(ItBtn, 'click', () => {
-            //  ...
+          window.location.href = 'http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng;
         });
+
         popi.setContent(container);
       }
       else if(statuts[k].vehicle_detected == 0){
@@ -249,7 +252,7 @@ export function deg2rad(x){
 
 export function createButton(label, container) {
     console.log("button created");
-    var btn = L.DomUtil.create('button', '', container);
+    var btn = L.DomUtil.create('button ', '', container);
     btn.setAttribute('type', 'button');
     btn.innerHTML = label;
     return btn;

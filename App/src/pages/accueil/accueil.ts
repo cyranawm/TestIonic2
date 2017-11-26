@@ -25,7 +25,7 @@ export class AccueilPage implements OnInit {
   d_string =this.D.slice(8,10)+'/'+this.D.slice(5,7)+'/'+this.D.slice(0,4)+' - '+this.D.slice(11,16)
 
   constructor(public navCtrl: NavController, public restapiService : RestApiServiceProvider,public BookingdataService : BookingdataProvider) {
-    setInterval(() => { this.draw_it(); }, 1000);  
+    setInterval(() => { this.check_booking(); }, 1000);  
   }
   
   ngOnInit(): void {
@@ -36,9 +36,9 @@ export class AccueilPage implements OnInit {
     var all_spots;
     var current_pos;
     var spot_statuts;
-    this.restapiService.getSpots().subscribe(res => {all_spots = res; 
+    this.restapiService.getSpots().subscribe(res => {all_spots = res["spots"]; 
                                                       console.log(all_spots);});
-    this.restapiService.getStatuts().subscribe(res => {spot_statuts = res;
+    this.restapiService.getStatuts().subscribe(res => {spot_statuts = res["statuses"];
                                                         console.log(spot_statuts)});
 
     /* ------------------------- Initialisation de la carte ------------------------- */
@@ -173,8 +173,8 @@ export class AccueilPage implements OnInit {
     ]).addTo(map)
   }
   
-  draw_it(){
+  check_booking(){
     var temp = J.get_booking();
-    this.BookingdataService.update_booking(temp.is_booked,temp.id,temp.address,this.d_string)
+    this.BookingdataService.update_booking(temp.is_booked,temp.id,temp.address,this.d_string,temp.lat,temp.lng)
   }
 }

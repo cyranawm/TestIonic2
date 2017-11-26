@@ -36,7 +36,7 @@
   },
   {
     "id":2,
-    "spot_type": "Statio'Pass",
+    "spot_type": "Statio'Elec",
     "libre" : 0,
     "comments" :"STP.0001.FR.10/03/05",
     "location":{
@@ -85,7 +85,7 @@
   {
     "id" : 2,
     "vehicle_detected":{
-      "value" : 1,
+      "value" : 0,
       "date" : ""
     },
     "connected" : {

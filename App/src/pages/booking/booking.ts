@@ -38,7 +38,7 @@ export class BookingPage {
 					text: 'Oui',
 					handler: () => {
 						console.log('Booking deleted');
-						this.BookingDataService.update_booking(false,"/","/","/")
+						this.BookingDataService.update_booking(false,"","","","","")
 						J.cancel_booking();
 					}
 				}
@@ -46,5 +46,6 @@ export class BookingPage {
 		});
 		alert.present();
 	}
+	
 	
 }

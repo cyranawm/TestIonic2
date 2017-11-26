@@ -3,8 +3,9 @@ import 'leaflet-easybutton';
 import 'leaflet.markercluster';
 import 'leaflet-routing-machine';
 import { BookingdataProvider } from "../../providers/bookingdata/bookingdata";
+import * as $ from 'jquery'
 
-var my_booking = {is_booked : false,id : "",address : ""};
+var my_booking = {is_booked : false,id : "",address : "",lat :"",lng:""};
 
 
 export function get_booking(){
@@ -12,7 +13,8 @@ export function get_booking(){
 }
 
 export function cancel_booking(){
-  my_booking = {is_booked : false,id : "",address : ""};
+  console.log("Booking canceled locally")
+  my_booking = {is_booked : false,id : "",address : "",lat :"",lng:""};
 }
 
 export function getAllSpots(data,pos){
@@ -218,11 +220,32 @@ export function get_pass(data,cluster,pos,stat){
           ItBtn = createButton('Itinéraire', container),
           BookBtn = createButton('Réserver', container);
 
+        // if (!my_booking.is_booked){
+        //   BookBtn.innerHTML = "Réserver";
+        //   BookBtn.style.backgroundColor = "#488aff";
+        //   BookBtn.style.color = "white";
+        // }
 
         L.DomEvent.on(BookBtn, 'click', () => {
-          my_booking.is_booked = true;
-          my_booking.id = spots[k].id;
-          my_booking.address = spots[k].address;
+          if (!my_booking.is_booked){
+            my_booking.is_booked = true;
+            my_booking.id = spots[k].id;
+            my_booking.address = spots[k].address;
+            my_booking.lat = spots[k].lat;
+            my_booking.lng= spots[k].lng;
+            BookBtn.innerHTML = "Annuler";
+            BookBtn.style.backgroundColor = "#d34836";
+            BookBtn.style.color = "white";            
+            $(".leaflet-popup-close-button")[0].click();          
+
+          }
+          else {
+            cancel_booking();
+            $(".leaflet-popup-close-button")[0].click();      
+            BookBtn.innerHTML = "Réserver";
+            BookBtn.style.backgroundColor = "#488aff";
+            BookBtn.style.color = "white";
+          }
         });
 
         L.DomEvent.on(ItBtn, 'click', () => {
@@ -240,7 +263,6 @@ export function get_pass(data,cluster,pos,stat){
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon : Icone, statecluster : statecluster})
         //.bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat+"<br>"+button+"<br> Plage de fonctionnement : Chargement...")
         .bindPopup(popi)
-        .openPopup();
       cluster.addLayer(marker)
     }
   }
@@ -252,9 +274,19 @@ export function deg2rad(x){
 
 export function createButton(label, container) {
     console.log("button created");
-    var btn = L.DomUtil.create('button ', '', container);
+    var btn = L.DomUtil.create('button', '', container);
     btn.setAttribute('type', 'button');
     btn.innerHTML = label;
+    // Ajout du style du boutton : 
+    btn.style.backgroundColor = '#488aff'
+    btn.style.color = 'white';
+    btn.style.fontSize = 'medium';
+    btn.onmouseover = function(){
+      btn.style.color = 'black';
+    }
+    btn.onmouseleave = function(){
+      btn.style.color = 'white';
+    }
     return btn;
 }
 

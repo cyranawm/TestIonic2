@@ -17,6 +17,8 @@ export function cancel_booking(){
   my_booking = {is_booked : false,id : "",address : "",lat :"",lng:""};
 }
 
+//Fonction pour recuperer les spots en bdd
+
 export function getAllSpots(data,pos){
   var spots = new Array();
   for(let index in data){  
@@ -57,6 +59,12 @@ export function getAllStatuts(data){
 }
 
 
+
+
+
+
+
+
 //fonction d'implementation des spots
 export function get_minute(data,cluster,pos,stat){
   console.log("Minute called")
@@ -81,33 +89,92 @@ export function get_minute(data,cluster,pos,stat){
   });
 
   for (let k in spots){
-    if ((spots[k].type_spot == "Statio'Minute") && (spots[k].dist <= 1000) ){
+    if ((spots[k].type_spot == "Statio'Minute") && (spots[k].dist <= 10000) ){
+
+      var popi = L.popup();
+
       if(statuts[k].connected ==0){
         var Icone=DecoMinute;
         var etat="Informations indisponibles";
         var statecluster="indisponibles";
-        // var button = "";
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          BusyBtn = createButton('Indisponible', container);
+
+        BusyBtn.style.backgroundColor = "grey";
+
+        popi.setContent(container);
+
       }
       else if (statuts[k].vehicle_detected == 1) {
         var Icone=OccupeMinute;
         var etat="Occupé";
-        var statecluster="occupe";
-        // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
+        var statecluster="occupe"
+
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          BusyBtn = createButton('Place occupée', container);
+
+        BusyBtn.style.backgroundColor = "grey";
+
+        popi.setContent(container);
+
       }
       else if(statuts[k].vehicle_detected == 0){
         var Icone=LibreMinute;
         var etat="Libre";
         var statecluster="libre";
-        // var button = '<br><a class="waves-effect waves-light btn green modal-trigger" onClick="reserver('+value.id+","+devicenumber+","+value.latitude+","+value.longitude+')"><span class="white-text">Réserver</span></a><a class="waves-effect waves-light btn green modal-trigger" onClick="calcitineraire('+value.id+','+value.latitude+','+value.longitude+')"><span class="white-text">Itinéraire</span></a>'
+
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          ItBtn = createButton('Itinéraire', container),
+          BookBtn = createButton('Réserver', container);
+
+        L.DomEvent.on(BookBtn, 'click', () => {
+          if (!my_booking.is_booked){
+            my_booking.is_booked = true;
+            my_booking.id = spots[k].id;
+            my_booking.address = spots[k].address;
+            my_booking.lat = spots[k].lat;
+            my_booking.lng= spots[k].lng;
+            BookBtn.innerHTML = "Annuler";
+            BookBtn.style.backgroundColor = "#d34836";
+            BookBtn.style.color = "white";            
+            $(".leaflet-popup-close-button")[0].click();          
+
+          }
+          else {
+            cancel_booking();
+            $(".leaflet-popup-close-button")[0].click();      
+            BookBtn.innerHTML = "Réserver";
+            BookBtn.style.backgroundColor = "#488aff";
+            BookBtn.style.color = "white";
+          }
+        });
+
+        L.DomEvent.on(ItBtn, 'click', () => {
+          window.location.href = 'http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng;
+        });
+
+        popi.setContent(container);
       }
 
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon : Icone, statecluster : statecluster})
-        .bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat/*+button*/+"<br> Plage de fonctionnement : Chargement...")
+        .bindPopup(popi)
         .openPopup();
       cluster.addLayer(marker)
     }
   }
 }
+
+
+
+
+
+
 
 export function get_elec(data, cluster,pos,stat){
   console.log("Elec called")
@@ -139,34 +206,92 @@ export function get_elec(data, cluster,pos,stat){
   });
 
   for (let k in spots){
-    if ((spots[k].type_spot == "Statio'Elec") && (spots[k].dist <= 1000)){
+    if ((spots[k].type_spot == "Statio'Elec") && (spots[k].dist <= 10000)){
+
+      var popi = L.popup();
+
       if(statuts[k].connected ==0){
         var Icone=DecoElec;
         var etat="Informations indisponibles";
         var statecluster="indisponibles";
-        // var button = "";
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          BusyBtn = createButton('Indisponible', container);
+
+        BusyBtn.style.backgroundColor = "grey";
+
+        popi.setContent(container);
       }
       else if (statuts[k].vehicle_detected == 1) {
         var Icone=OccupeElec;
         var etat="Occupé";
         var statecluster="occupe";
-        // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          BusyBtn = createButton('Place occupée', container);
+
+        BusyBtn.style.backgroundColor = "grey";
+
+        popi.setContent(container);
       }
 
       else if(statuts[k].vehicle_detected == 0){
         var Icone=LibreElec;
         var etat="Libre";
         var statecluster="libre";
-        // var button = '<br><a class="waves-effect waves-light btn green modal-trigger" onClick="reserver('+value.id+","+devicenumber+","+value.latitude+","+value.longitude+')"><span class="white-text">Réserver</span></a><a class="waves-effect waves-light btn green modal-trigger" onClick="calcitineraire('+value.id+','+value.latitude+','+value.longitude+')"><span class="white-text">Itinéraire</span></a>'
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          ItBtn = createButton('Itinéraire', container),
+          BookBtn = createButton('Réserver', container);
+
+        L.DomEvent.on(BookBtn, 'click', () => {
+          if (!my_booking.is_booked){
+            my_booking.is_booked = true;
+            my_booking.id = spots[k].id;
+            my_booking.address = spots[k].address;
+            my_booking.lat = spots[k].lat;
+            my_booking.lng= spots[k].lng;
+            BookBtn.innerHTML = "Annuler";
+            BookBtn.style.backgroundColor = "#d34836";
+            BookBtn.style.color = "white";            
+            $(".leaflet-popup-close-button")[0].click();          
+
+          }
+          else {
+            cancel_booking();
+            $(".leaflet-popup-close-button")[0].click();      
+            BookBtn.innerHTML = "Réserver";
+            BookBtn.style.backgroundColor = "#488aff";
+            BookBtn.style.color = "white";
+          }
+        });
+
+        L.DomEvent.on(ItBtn, 'click', () => {
+          window.location.href = 'http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng;
+        });
+
+        popi.setContent(container);
       }
 
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon : Icone, statecluster : statecluster})
-        .bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat/*+button*/+"<br> Plage de fonctionnement : Chargement...")
+        .bindPopup(popi)
         .openPopup();
       cluster.addLayer(marker)
     }
   }
 }
+
+
+
+
+
+
+
+
+
 
 export function get_pass(data,cluster,pos,stat){
   console.log("Pass called")
@@ -199,21 +324,41 @@ export function get_pass(data,cluster,pos,stat){
           });
 
   for (let k in spots){
-    if ((spots[k].type_spot == "Statio'Pass")&& (spots[k].dist <= 1000)){      
+    if ((spots[k].type_spot == "Statio'Pass")&& (spots[k].dist <= 10000)){      
+      
+      var popi = L.popup();
+
       if(statuts[k].connected ==0){
         var Icone=DecoPass;
         var etat="Informations indisponibles";
         var statecluster="indisponibles";
-        var button = "";
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          BusyBtn = createButton('Indisponible', container);
+
+        BusyBtn.style.backgroundColor = "grey";
+
+        popi.setContent(container);
       }
       else if (statuts[k].vehicle_detected == 1) {
         var Icone=OccupePass;
         var etat="Occupé";
         var statecluster="occupe";
-        var button = '<a class="marker-button" onClick ="book()"><span class="white-text" > Réserver </span></a> <a class=marker-button href=http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng+
-'><span class="white-text"> Itinéraire </span></a>';
-        // var button = '<br><a class="waves-effect waves-light btn blue modal-trigger park" onClick="park('+value.id+','+devicenumber+','+value.latitude+','+value.longitude+')"><span class="white-text">Se souvenir de cette position</span></a>';s
-        var popi = L.popup();
+
+        var container = L.DomUtil.create('div'),
+          PopupTxt = createText(spots[k],etat,container),
+          BusyBtn = createButton('Place occupée', container);
+
+        BusyBtn.style.backgroundColor = "grey";
+
+        popi.setContent(container);
+        
+      }
+      else if(statuts[k].vehicle_detected == 0){
+        var Icone=LibrePass;
+        var etat="Libre";
+        var statecluster="libre";
 
         var container = L.DomUtil.create('div'),
           PopupTxt = createText(spots[k],etat,container),
@@ -254,19 +399,25 @@ export function get_pass(data,cluster,pos,stat){
 
         popi.setContent(container);
       }
-      else if(statuts[k].vehicle_detected == 0){
-        var Icone=LibrePass;
-        var etat="Libre";
-        var statecluster="libre";
-        var button = "";
-      }
+
       var marker = L.marker([spots[k].lat, spots[k].lng],{icon : Icone, statecluster : statecluster})
-        //.bindPopup("Place n° "+spots[k].id+"<br>Ville : "+spots[k].city+"<br>Adresse : "+spots[k].address+"<br>Type de place : "+spots[k].type_spot+"<br> Etat : "+etat+"<br>"+button+"<br> Plage de fonctionnement : Chargement...")
         .bindPopup(popi)
+        .openPopup();
       cluster.addLayer(marker)
     }
   }
+
+  
 }
+
+
+
+
+
+
+
+
+
 
 export function deg2rad(x){
   return Math.PI*x/180;

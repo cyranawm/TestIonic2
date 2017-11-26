@@ -166,11 +166,15 @@ export class AccueilPage implements OnInit {
           }]
     });
 
-    L.easyBar([
+    /*L.easyBar([
       flashButton,
       chronoButton,
       handiButton,
-    ]).addTo(map)
+    ]).addTo(map)*/
+    flashButton.addTo(map);
+    chronoButton.addTo(map);
+    handiButton.addTo(map);
+
   }
   
   check_booking(){

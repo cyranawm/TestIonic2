@@ -68,13 +68,59 @@
         "href": "https://api.technolia.fr/devices/5"
       }
     }
+  },
+  {
+    "id":3,
+    "spot_type": "Statio'Minute",
+    "libre" : 1,
+    "comments" :"STP.0001.FR.10/03/05",
+    "location":{
+        "id":14,
+        "gps":{
+          "longitude":7.7,
+          "latitude":48.2
+        },
+      "address": "3 rue de la Rheinmatt",
+      "zip_code":"",
+      "town":"Strasbourg",
+      "country":"France"
+    },
+    "customs":null,
+    "cal_active_is_dirty":null,
+    "plug_type":null,
+    "plug_power":null,
+    "type":"spot", 
+    "links":{
+      "self":{
+        "href": "https://api.technolia.fr/spots/1"
+      },
+      "device":{
+        "title":"the device owning this spot",
+        "href": "https://api.technolia.fr/devices/1"
+      },
+      "master_device":{
+        "title":"the master device this spot is connected to",
+        "href": "https://api.technolia.fr/devices/5"
+      }
+    }
   }],
 
 
   "logs" : [{
     "id" : 1,
     "vehicle_detected":{
-      "value" : 1,
+      "value" : 0,
+      "date" : ""
+    },
+    "connected" : {
+      "value" : 0,
+      "date" : ""
+    }
+  },
+  {
+    "id" : 2,
+    "vehicle_detected":{
+      "value" : 0,
       "date" : ""
     },
     "connected" : {
@@ -83,7 +129,7 @@
     }
   },
   {
-    "id" : 2,
+    "id" : 3,
     "vehicle_detected":{
       "value" : 0,
       "date" : ""

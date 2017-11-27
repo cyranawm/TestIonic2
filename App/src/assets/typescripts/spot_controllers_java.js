@@ -21,7 +21,7 @@ export function cancel_booking(){
 
 export function getAllSpots(data,pos){
   var spots = new Array();
-  for(let index in data){  
+  for(var index in data){  
     if (data[index]["location"]["gps"]["latitude"] != null ) {
       var d = get_distance_m(data[index]["location"]["gps"]["latitude"], data[index]["location"]["gps"]["longitude"],pos.lat,pos.lng)    
         spots.push({
@@ -41,7 +41,7 @@ export function getAllSpots(data,pos){
 
 export function getAllStatuts(data){
   var statuts = new Array();
-  for (let index in data){
+  for (var index in data){
     if (data[index]["vehicle_detected"] != undefined ){
       statuts.push({
         "vehicle_detected": data[index]["vehicle_detected"]["value"],
@@ -88,7 +88,7 @@ export function get_minute(data,cluster,pos,stat){
     popupAnchor:  [0, -50] 
   });
 
-  for (let k in spots){
+  for (var k in spots){
     if ((spots[k].type_spot == "Statio'Minute") && (spots[k].dist <= 10000) ){
 
       var popi = L.popup();
@@ -133,7 +133,7 @@ export function get_minute(data,cluster,pos,stat){
           ItBtn = createButton('Itinéraire', container),
           BookBtn = createButton('Réserver', container);
 
-        L.DomEvent.on(BookBtn, 'click', () => {
+        L.DomEvent.on(BookBtn, 'click', function(){
           if (!my_booking.is_booked){
             my_booking.is_booked = true;
             my_booking.id = spots[k].id;
@@ -155,7 +155,7 @@ export function get_minute(data,cluster,pos,stat){
           }
         });
 
-        L.DomEvent.on(ItBtn, 'click', () => {
+        L.DomEvent.on(ItBtn, 'click', function(){
           window.location.href = 'http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng;
         });
 
@@ -205,7 +205,7 @@ export function get_elec(data, cluster,pos,stat){
     popupAnchor:  [0, -50] 
   });
 
-  for (let k in spots){
+  for (var k in spots){
     if ((spots[k].type_spot == "Statio'Elec") && (spots[k].dist <= 10000)){
 
       var popi = L.popup();
@@ -247,7 +247,7 @@ export function get_elec(data, cluster,pos,stat){
           ItBtn = createButton('Itinéraire', container),
           BookBtn = createButton('Réserver', container);
 
-        L.DomEvent.on(BookBtn, 'click', () => {
+        L.DomEvent.on(BookBtn, 'click', function(){
           if (!my_booking.is_booked){
             my_booking.is_booked = true;
             my_booking.id = spots[k].id;
@@ -269,7 +269,7 @@ export function get_elec(data, cluster,pos,stat){
           }
         });
 
-        L.DomEvent.on(ItBtn, 'click', () => {
+        L.DomEvent.on(ItBtn, 'click', function(){
           window.location.href = 'http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng;
         });
 
@@ -323,7 +323,7 @@ export function get_pass(data,cluster,pos,stat){
           popupAnchor:  [0, -50] 
           });
 
-  for (let k in spots){
+  for (var k in spots){
     if ((spots[k].type_spot == "Statio'Pass")&& (spots[k].dist <= 10000)){      
       
       var popi = L.popup();
@@ -371,7 +371,7 @@ export function get_pass(data,cluster,pos,stat){
         //   BookBtn.style.color = "white";
         // }
 
-        L.DomEvent.on(BookBtn, 'click', () => {
+        L.DomEvent.on(BookBtn, 'click', function(){
           if (!my_booking.is_booked){
             my_booking.is_booked = true;
             my_booking.id = spots[k].id;
@@ -393,7 +393,7 @@ export function get_pass(data,cluster,pos,stat){
           }
         });
 
-        L.DomEvent.on(ItBtn, 'click', () => {
+        L.DomEvent.on(ItBtn, 'click', function(){
           window.location.href = 'http://maps.apple.com/?ll='+spots[k].lat+','+spots[k].lng;
         });
 

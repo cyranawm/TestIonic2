@@ -8,15 +8,13 @@ import { ForgotPasswordPage } from "../forgot-password/forgot-password";
 @NgModule({
   declarations: [
     ConnexionPage,
-    ForgotPasswordPage
   ],
   imports: [
     IonicPageModule.forChild(ConnexionPage),
     IonicStorageModule.forRoot(),
-  ],
+      ],
   exports: [
     ConnexionPage,
-    ForgotPasswordPage
   ]
 })
 export class ConnexionPageModule {}

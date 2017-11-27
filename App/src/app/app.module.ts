@@ -11,6 +11,7 @@ import { InscriptionPage } from "../pages/inscription/inscription";
 import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Geolocation } from '@ionic-native/geolocation';
 import { ForgotPasswordPage } from "../pages/forgot-password/forgot-password";
 import { MonComptePage } from "../pages/mon-compte/mon-compte";
 import { AuthService } from './../providers/auth-service/auth-service';
@@ -21,14 +22,7 @@ import { BookingdataProvider } from '../providers/bookingdata/bookingdata';
 @NgModule({
   declarations: [
     MyApp,
-    AccueilPage,
-    AidePage,
-    ConnexionPage,
-    BookingPage,
-    InscriptionPage,
     TabsPage,
-    MonComptePage,
-    ForgotPasswordPage,
   ],
   imports: [
     BrowserModule,
@@ -54,6 +48,7 @@ import { BookingdataProvider } from '../providers/bookingdata/bookingdata';
     RestApiServiceProvider,
     AuthService,
     BookingdataProvider,
+    Geolocation,
       ]
 })
 export class AppModule {}

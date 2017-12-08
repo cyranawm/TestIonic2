@@ -22,7 +22,14 @@ import { BookingdataProvider } from '../providers/bookingdata/bookingdata';
 @NgModule({
   declarations: [
     MyApp,
+    AccueilPage,
+    AidePage,
+    ConnexionPage,
+    BookingPage,
+    InscriptionPage,
     TabsPage,
+    MonComptePage,
+    ForgotPasswordPage,
   ],
   imports: [
     BrowserModule,

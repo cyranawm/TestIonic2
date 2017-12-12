@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class RestApiServiceProvider {
   public
-    // url = "http://localhost:3000/"
-    url = "https://api.technolia.fr/"
+    url = "http://localhost:3000/"
+    // url = "https://api.technolia.fr/"
 
   constructor(public http: Http) {
   }

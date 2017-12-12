@@ -22,7 +22,7 @@ export function cancel_booking(){
 export function getAllSpots(data,pos){
   var spots = new Array();
   for(var index in data){  
-    if (data[index]["location"]["gps"]["latitude"] != null ) {
+    if ((data[index]["location"]["gps"]["latitude"] != null) && (data[index]["location"]["address"] != "non installé") ) {
       var d = get_distance_m(data[index]["location"]["gps"]["latitude"], data[index]["location"]["gps"]["longitude"],pos.lat,pos.lng)    
         spots.push({
           "lat" : data[index]["location"]["gps"]["latitude"],
@@ -126,7 +126,7 @@ export function get_minute(data,cluster,pos,stat){
         var Icone=LibreMinute;
         var etat="Libre";
         var statecluster="libre";
-
+        var k_local = k;
 
         var container = L.DomUtil.create('div'),
           PopupTxt = createText(spots[k],etat,container),
@@ -136,10 +136,10 @@ export function get_minute(data,cluster,pos,stat){
         L.DomEvent.on(BookBtn, 'click', function(){
           if (!my_booking.is_booked){
             my_booking.is_booked = true;
-            my_booking.id = spots[k].id;
-            my_booking.address = spots[k].address;
-            my_booking.lat = spots[k].lat;
-            my_booking.lng= spots[k].lng;
+            my_booking.id = spots[k_local].id;
+            my_booking.address = spots[k_local].address;
+            my_booking.lat = spots[k_local].lat;
+            my_booking.lng= spots[k_local].lng;
             BookBtn.innerHTML = "Annuler";
             BookBtn.style.backgroundColor = "#d34836";
             BookBtn.style.color = "white";            
@@ -214,7 +214,7 @@ export function get_elec(data, cluster,pos,stat){
         var Icone=DecoElec;
         var etat="Informations indisponibles";
         var statecluster="indisponibles";
-
+        
         var container = L.DomUtil.create('div'),
           PopupTxt = createText(spots[k],etat,container),
           BusyBtn = createButton('Indisponible', container);
@@ -241,6 +241,7 @@ export function get_elec(data, cluster,pos,stat){
         var Icone=LibreElec;
         var etat="Libre";
         var statecluster="libre";
+        var k_local = k;
 
         var container = L.DomUtil.create('div'),
           PopupTxt = createText(spots[k],etat,container),
@@ -250,10 +251,10 @@ export function get_elec(data, cluster,pos,stat){
         L.DomEvent.on(BookBtn, 'click', function(){
           if (!my_booking.is_booked){
             my_booking.is_booked = true;
-            my_booking.id = spots[k].id;
-            my_booking.address = spots[k].address;
-            my_booking.lat = spots[k].lat;
-            my_booking.lng= spots[k].lng;
+            my_booking.id = spots[k_local].id;
+            my_booking.address = spots[k_local].address;
+            my_booking.lat = spots[k_local].lat;
+            my_booking.lng= spots[k_local].lng;
             BookBtn.innerHTML = "Annuler";
             BookBtn.style.backgroundColor = "#d34836";
             BookBtn.style.color = "white";            
@@ -359,25 +360,20 @@ export function get_pass(data,cluster,pos,stat){
         var Icone=LibrePass;
         var etat="Libre";
         var statecluster="libre";
+        var k_local = k;
 
         var container = L.DomUtil.create('div'),
           PopupTxt = createText(spots[k],etat,container),
           ItBtn = createButton('Itinéraire', container),
           BookBtn = createButton('Réserver', container);
 
-        // if (!my_booking.is_booked){
-        //   BookBtn.innerHTML = "Réserver";
-        //   BookBtn.style.backgroundColor = "#488aff";
-        //   BookBtn.style.color = "white";
-        // }
-
         L.DomEvent.on(BookBtn, 'click', function(){
           if (!my_booking.is_booked){
             my_booking.is_booked = true;
-            my_booking.id = spots[k].id;
-            my_booking.address = spots[k].address;
-            my_booking.lat = spots[k].lat;
-            my_booking.lng= spots[k].lng;
+            my_booking.id = spots[k_local].id;
+            my_booking.address = spots[k_local].address;
+            my_booking.lat = spots[k_local].lat;
+            my_booking.lng= spots[k_local].lng;
             BookBtn.innerHTML = "Annuler";
             BookBtn.style.backgroundColor = "#d34836";
             BookBtn.style.color = "white";            
@@ -429,7 +425,7 @@ export function createButton(label, container) {
     btn.setAttribute('type', 'button');
     btn.innerHTML = label;
     // Ajout du style du boutton : 
-    btn.style.backgroundColor = '#488aff'
+    btn.style.backgroundColor = "#488aff";
     btn.style.color = 'white';
     btn.style.fontSize = 'medium';
     btn.onmouseover = function(){

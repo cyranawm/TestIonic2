@@ -64,11 +64,14 @@ export class AccueilPage implements OnInit {
 
 
 
-      J.get_elec(all_spots,cluster_elec,current_pos,spot_statuts);
+      J.get_elec(all_spots,cluster_elec,current_pos,spot_statuts);          
+      map.removeLayer(cluster_elec);
       map.addLayer(cluster_elec);
       J.get_minute(all_spots,cluster_minute,current_pos,spot_statuts);
+      map.removeLayer(cluster_minute);
       map.addLayer(cluster_minute);
       J.get_pass(all_spots,cluster_pass,current_pos,spot_statuts);
+      map.removeLayer(cluster_pass)
     }
       
     function onLocationError(e): void  { 

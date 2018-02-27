@@ -80,7 +80,7 @@ export class AccueilPage implements OnInit {
 
     map.on('locationfound',onLocationFound);
     map.on('locationerror',onLocationError);
-    map.locate({setView:true, maxZoom: 16})
+    map.locate({setView:true, maxZoom: 16, watch:false})
 
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
     new L.Control.EasyButton({
@@ -91,7 +91,7 @@ export class AccueilPage implements OnInit {
       states:[{                 
         stateName: 'get-center',
         onClick: function(btn, map){
-          map.locate({setView:true, maxZoom: 16})
+          map.locate({setView:true, maxZoom: 16, watch:false})
           },
         title: 'geolocate me',
         icon: 'fa-crosshairs'

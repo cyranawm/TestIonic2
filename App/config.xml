@@ -3,6 +3,7 @@
     <name>StatioGuide</name>
     <description>Une application Technolia</description>
     <author email="contact@technolia.fr" href="http://technolia.fr/">Technolia</author>
+
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />

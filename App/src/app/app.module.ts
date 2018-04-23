@@ -23,13 +23,6 @@ import { BookingdataProvider } from '../providers/bookingdata/bookingdata';
   declarations: [
     MyApp,
     TabsPage,
-    // AccueilPage,
-    // BookingPage,    
-    // AidePage,
-    // ConnexionPage,
-    // InscriptionPage,
-    // MonComptePage,
-    // ForgotPasswordPage,
   ],
   imports: [
     BrowserModule,

@@ -63,15 +63,13 @@ export class AccueilPage implements OnInit {
       map.addLayer(Location_circle);
 
 
+      cluster_elec.clearLayers();
+      cluster_pass.clearLayers();
+      cluster_minute.clearLayers();
 
-      J.get_elec(all_spots,cluster_elec,current_pos,spot_statuts);          
-      map.removeLayer(cluster_elec);
-      map.addLayer(cluster_elec);
+      J.get_elec(all_spots,cluster_elec,current_pos,spot_statuts);
       J.get_minute(all_spots,cluster_minute,current_pos,spot_statuts);
-      map.removeLayer(cluster_minute);
-      map.addLayer(cluster_minute);
       J.get_pass(all_spots,cluster_pass,current_pos,spot_statuts);
-      map.removeLayer(cluster_pass)
     }
       
     function onLocationError(e): void  { 
@@ -80,7 +78,19 @@ export class AccueilPage implements OnInit {
 
     map.on('locationfound',onLocationFound);
     map.on('locationerror',onLocationError);
-    map.locate({setView:true, maxZoom: 16, watch:false})
+    
+    var loc_options = {
+      setView:true,
+      maxZoom: 16,
+      maximumAge: 180000,
+      watch:false,
+      enableHighAccurcy: true
+    }
+
+    map.locate(loc_options);
+
+    map.addLayer(cluster_elec);
+    map.addLayer(cluster_minute);
 
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
     new L.Control.EasyButton({
@@ -91,7 +101,7 @@ export class AccueilPage implements OnInit {
       states:[{                 
         stateName: 'get-center',
         onClick: function(btn, map){
-          map.locate({setView:true, maxZoom: 16, watch:false})
+          map.locate(loc_options)
           },
         title: 'geolocate me',
         icon: 'fa-crosshairs'
@@ -111,7 +121,6 @@ export class AccueilPage implements OnInit {
           title:     'flash',
           onClick: function(btn, map) {
             btn.state('noflash');
-            //cluster_elec.clearLayers();
             map.removeLayer(cluster_elec);
             //cluster_elec.removeLayers;
             
@@ -123,7 +132,8 @@ export class AccueilPage implements OnInit {
           title:     'not-flash',       
           onClick: function(btn, map) { 
             btn.state('flash');
-            //J.get_elec(all_spots,cluster_elec,current_pos,spot_statuts);
+            cluster_elec.clearLayers();
+            J.get_elec(all_spots,cluster_elec,current_pos,spot_statuts);
             map.addLayer(cluster_elec);
                 
             }
@@ -141,7 +151,6 @@ export class AccueilPage implements OnInit {
         title:     'chrono',
         onClick: function(btn, map) {
           btn.state('nochrono');
-          //cluster_minute.clearLayers();
           map.removeLayer(cluster_minute);
           //cluster_minute.removeLayers;
           
@@ -152,8 +161,9 @@ export class AccueilPage implements OnInit {
         title:     'not-chrono',                // like its title
         onClick: function(btn, map) { 
           btn.state('chrono'); 
-          //J.get_minute(all_spots,cluster_minute,current_pos,spot_statuts);
-          map.addLayer(cluster_minute);              
+          cluster_minute.clearLayers();
+          J.get_minute(all_spots,cluster_minute,current_pos,spot_statuts);
+          map.addLayer(cluster_minute); 
           }
         }]
     });
@@ -167,7 +177,8 @@ export class AccueilPage implements OnInit {
             icon:      'fa-wheelchair',   
             title:     'not-handi',      
             onClick: function(btn, map) { 
-              //J.get_pass(all_spots,cluster_pass,current_pos,spot_statuts);
+              cluster_pass.clearLayers();
+              J.get_pass(all_spots,cluster_pass,current_pos,spot_statuts);
               btn.state('handi'); 
               map.addLayer(cluster_pass);
                  
@@ -178,7 +189,6 @@ export class AccueilPage implements OnInit {
             title:     'handi',
             onClick: function(btn, map) {
               btn.state('nohandi');
-              //cluster_pass.clearLayers();
               map.removeLayer(cluster_pass);
               //cluster_pass.removeLayers;
               

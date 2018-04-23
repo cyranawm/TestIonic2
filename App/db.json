@@ -80,7 +80,7 @@
           "longitude":7.7,
           "latitude":48.2
         },
-      "address": "3 rue de la Rheinmatt",
+      "address": "2 rue de la Rheinmatt",
       "zip_code":"",
       "town":"Strasbourg",
       "country":"France"
@@ -113,7 +113,7 @@
       "date" : ""
     },
     "connected" : {
-      "value" : 0,
+      "value" : 1,
       "date" : ""
     }
   },

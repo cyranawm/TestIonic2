@@ -62,6 +62,7 @@ export class AccueilPage implements OnInit {
       Location_marker.bindPopup("Vous êtes ici");
       map.addLayer(Location_circle);
 
+
       cluster_elec.clearLayers();
       cluster_pass.clearLayers();
       cluster_minute.clearLayers();
@@ -69,7 +70,6 @@ export class AccueilPage implements OnInit {
       J.get_elec(all_spots,cluster_elec,current_pos,spot_statuts);
       J.get_minute(all_spots,cluster_minute,current_pos,spot_statuts);
       J.get_pass(all_spots,cluster_pass,current_pos,spot_statuts);
-
     }
       
     function onLocationError(e): void  { 
@@ -91,8 +91,6 @@ export class AccueilPage implements OnInit {
 
     map.addLayer(cluster_elec);
     map.addLayer(cluster_minute);
-
-
 
     /* ------------------- Implémentation boutton géolocalisation ------------------- */
     new L.Control.EasyButton({
@@ -166,7 +164,6 @@ export class AccueilPage implements OnInit {
           cluster_minute.clearLayers();
           J.get_minute(all_spots,cluster_minute,current_pos,spot_statuts);
           map.addLayer(cluster_minute); 
-             
           }
         }]
     });
